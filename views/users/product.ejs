@@ -1,0 +1,374 @@
+
+
+
+<%-include('../layout/header.ejs')%>
+
+<%-include('../layout/navigation.ejs')%>
+
+<style>
+    h3{
+        color: black;
+    }
+</style>
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="breadcrumb-tree">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">All Categories</a></li>
+                    <li><a href="#">Accessories</a></li>
+                    <!-- <li class="active">Headphones (227,490 Results)</li> -->
+                </ul>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- ASIDE -->
+            <div id="aside" class="col-md-3">
+                <!-- aside Widget -->
+                <div class="aside">
+                    <h3 class="aside-title">Categories</h3>
+                    <% categoryData.forEach((category, index) =>{%>
+                    <div class="checkbox-filter">
+                        <div class="input-checkbox">
+                            <input type="checkbox" id="category-<%=index+1%>">
+                            <label for="category-<%=index+1%>">
+                                <span></span>
+                                <%=category.categoryName%>
+                                <!-- <small>(120)</small> -->
+                            </label>
+                        </div>
+                    </div>
+                    <% }); %>
+                </div>
+                <!-- /aside Widget -->
+
+                	<!-- aside Widget -->
+						<!-- <div class="aside">
+							<h3 class="aside-title">Price</h3>
+							<div class="price-filter">
+								<div id="price-slider"></div>
+								<div class="input-number price-min">
+									<input id="price-min" type="number">
+									<span class="qty-up">+</span>
+									<span class="qty-down">-</span>
+								</div>
+								<span>-</span>
+								<div class="input-number price-max">
+									<input id="price-max" type="number">
+									<span class="qty-up">+</span>
+									<span class="qty-down">-</span>
+								</div>
+							</div>
+						</div> -->
+					<!-- /aside Widget -->
+
+                <!-- aside Widget -->
+                <div class="aside">
+                    <h3 class="aside-title">Brand</h3>
+                    <% brandData.forEach((brand, index)=>{%>
+                    <div class="checkbox-filter">
+                        <div class="input-checkbox">
+                            <input type="checkbox" id="brand-<%=index+1%>" class="brand-checkbox">
+                            <label for="brand-<%=index+1%>">
+                                <span></span>
+                                <%=brand.brandName%>
+                                <!-- <small>(578)</small> -->
+                            </label>
+                        </div>
+                    </div>
+                    <% }); %>
+                </div>
+                <!-- /aside Widget -->
+
+                <!-- aside Widget -->
+                <!-- <div class="aside">
+                    <h3 class="aside-title">Top selling</h3>
+                    <div class="product-widget">
+                        <div class="product-img">
+                            <img src="./images/Focus-Light.webp" alt="">
+                        </div>
+                        <div class="product-body">
+                            <p class="product-category">Category</p>
+                            <h3 class="product-name"><a href="#">Focus Light</a></h3>
+                            <h4 class="product-price">₹980.00 <del class="product-old-price">₹990.00</del></h4>
+                        </div>
+                    </div>
+
+                    <div class="product-widget">
+                        <div class="product-img">
+                            <img src="./images/LED-lights.jpg" alt="">
+                        </div>
+                        <div class="product-body">
+                            <p class="product-category">Category</p>
+                            <h3 class="product-name"><a href="#">LED Lights</a></h3>
+                            <h4 class="product-price">₹980.00 <del class="product-old-price">₹990.00</del></h4>
+                        </div>
+                    </div>
+
+                    <div class="product-widget">
+                        <div class="product-img">
+                            <img src="./images/MCB 2.webp" alt="">
+                        </div>
+                        <div class="product-body">
+                            <p class="product-category">Category</p>
+                            <h3 class="product-name"><a href="#">MCB</a></h3>
+                            <h4 class="product-price">₹980.00 <del class="product-old-price">₹990.00</del></h4>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- /aside Widget -->
+            </div>
+            <!-- /ASIDE -->
+
+            <!-- STORE -->
+            <div id="store" class="col-md-9">
+                <!-- store top filter -->
+                <!-- <div class="store-filter clearfix">
+                    <div class="store-sort">
+                        <label>
+                            Sort By:
+                            <select class="input-select">
+                                <option value="0">Popular</option>
+                                <option value="1">Position</option>
+                            </select>
+                        </label>
+
+                        <label>
+                            Show:
+                            <select class="input-select">
+                                <option value="0">20</option>
+                                <option value="1">50</option>
+                            </select>
+                        </label>
+                    </div>
+                    <ul class="store-grid">
+                        <li class="active"><i class="fa fa-th"></i></li>
+                        <li><a href="#"><i class="fa fa-th-list"></i></a></li>
+                    </ul>
+                </div> -->
+                <!-- /store top filter -->
+
+                <!-- store products -->
+                <div class="row">
+                    <!-- product -->
+                    <% productData.forEach(product=> {%>
+                    <div class="col-md-4 col-xs-6 product-item" data-brand="<%= product.brandName.brandName %>" >
+                        <div class="product">
+                            <a href="#/productDetails?id=<%=product._id%>"><div class="product-img">
+                                <% if(product.image.length >0) {%>
+                                <img src="/adminAssets/images/<%=product.image[0]%>" alt="">
+                                <% };%>
+
+                                <!-- <div class="product-label">
+                                <% if (product.offer || product.category.offer) { %>
+                                    <% if (product.offer && (!product.category.offer || product.offer.percentage > product.category.offer.percentage)) { %>
+                                    <span class="sale">-<%= product.offer.percentage %>%</span><span class="new">NEW</span>
+                                    <% } else if(product.category.offer){%>
+                                        <span class="sale">-<%= product.category.offer.percentage %>%</span><span class="new">NEW</span>
+                                </div>
+                                    <% } %>
+                                <% } %> -->
+                            </div></a>
+                            <div class="product-body">
+                                <p class="product-category"><%=product.category.categoryName%></p>
+                                <p class="product-brand warning"><%=product.brandName.brandName%></p>
+                                <h3 class="product-name"><a href="#"><%=product.name%></a></h3>
+                                <% if(product.offer && (!product.category.offer || product.offer.percentage > product.category.percentage)){%>
+                                <h4 class="product-price">₹ <%=product.discountedPrice%>
+                                    <del class="product-old-price">₹ <%=product.price%></del></h4>
+                                    <% }else if(product.category.offer){ %>
+                                        <h4 class="product-price">₹ <%=product.categoryDiscountedPrice%></h4>
+                                        <% }else{ %>
+                                            <h4 class="product-price">₹ <%=product.price%></h4>
+                                            <% }%>
+                                <div class="product-rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <div class="product-btns">
+                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+                                    <a href=""><button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></a></button>
+                                </div>
+                            </div>
+                            <div class="add-to-cart">
+                                <a onclick="addToCart('<%=product._id%>')"><button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button></a>
+                            </div>
+                        </div>
+                    </div>
+                    <% }); %>
+                    <!-- /product -->
+                </div>
+                <!-- /store products -->
+
+                <!-- store bottom filter -->
+                <div class="store-filter clearfix">
+                    <span class="store-qty">Showing 20-100 product</span>
+                    <ul class="store-pagination">
+                    <% for(let i=1;i<=totalPages;i++){%>
+                        <% if(currentPage==i){%>
+                            <li class="active"><a href="?page=<%= i %>"><%= i %></a></li>
+                            <% }else{ %>
+                        <li><a href="?page=<%= i %>"><%= i %></a></li>
+                            <% } %>
+
+                        <% }; %>
+                    </ul>
+                    <!-- <i class="fa fa-angle-right"></i> -->
+                </div>
+                <!-- /store bottom filter -->
+            </div>
+            <!-- /STORE -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+
+<!-- NEWSLETTER -->
+<div id="newsletter" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="newsletter">
+                    <p>Sign Up for the <strong>NEWSLETTER</strong></p>
+                    <form>
+                        <input class="input" type="email" placeholder="Enter Your Email">
+                        <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
+                    </form>
+                    <ul class="newsletter-follow">
+                        <li>
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /NEWSLETTER -->
+<%-include('../layout/footer.ejs')%>
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="/path/to/script.js"></script>
+<!-- Include SweetAlert library -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+<script>
+    $(document).ready(function () {
+        // Store the initial state of products
+        const initialProducts = $('.product-item');
+
+        // Attach a click event handler to brand checkboxes
+        $('.brand-checkbox').on('change', function () {
+            updateProductDisplay();
+        });
+
+        // Attach a click event handler to category checkboxes
+        $('[id^="category-"]').on('change', function () {
+            updateProductDisplay();
+        });
+
+        // Function to update the product display based on selected filters
+        function updateProductDisplay() {
+            // Get the selected brands
+            const selectedBrands = $('.brand-checkbox:checked').map(function () {
+                return $(this).siblings('label').text().trim();
+            }).get();
+
+            // Get the selected categories
+            const selectedCategories = $('[id^="category-"]:checked').map(function () {
+                return $(this).siblings('label').text().trim();
+            }).get();
+
+            // Filter products based on selected brands and categories
+            if (selectedBrands.length > 0 || selectedCategories.length > 0) {
+                initialProducts.hide();
+
+                initialProducts.each(function () {
+                    const productBrand = $(this).data('brand');
+                    const productCategory = $(this).find('.product-category').text().trim();
+
+                    if (
+                        (selectedBrands.length === 0 || selectedBrands.includes(productBrand)) &&
+                        (selectedCategories.length === 0 || selectedCategories.includes(productCategory))
+                    ) {
+                        $(this).show();
+                    }
+                });
+            } else {
+                // If no filters selected, show all products
+                initialProducts.show();
+            }
+        }
+    });
+
+    // Add to Cart function
+    function addToCart(id){
+        console.log('Add to cart function called'+id);
+        $.ajax({
+            url:"/addToCart",
+            method:"post",
+            encoded:true,
+            data:{id:id},
+        }).done((data)=>{
+            if(data){
+                console.log(data);
+
+                Swal.fire({
+                    icon:'success',
+                    title:'Item has been added to cart',
+                    showConfirmButton:false,
+                    timer:1000
+                })
+            }else{
+                Swal({
+                    icon:'warning',
+                    title:'Fail to add',
+                    showConfirmButton:false,
+                    timer:1000
+                });
+            }
+        });
+    }
+</script>
+
+
+
+
+
+
+

@@ -1,0 +1,121 @@
+
+<%-include('../layout/header.ejs') %>
+
+<%-include('../layout/navigation.ejs')%>
+
+<style>
+    h3 {
+        color: black;
+    }
+</style>
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="breadcrumb-header">Orders</h3>
+                <ul class="breadcrumb-tree">
+                    <li><a href="/home">Home</a></li>
+                    <li class="active">Orders</li>
+                </ul>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+
+<!-- section -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row justify-content-center">
+            <table class="table">
+                <thead class="thead-dark" style="background-color:rgb(209,0,36);">
+                  <tr class="text-light" style="color: white;">
+                    <th scope="col">No</th>
+                    <th scope="col">Order Date</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Payment</th>
+                    <th scope="col">Expected Devlivery</th>
+                    <th scope="col">Order Status</th>
+                    <th scope="col">Tracking Number</th>
+                    <th scope="col">Details</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% if(orderData.length > 0) { %>
+                        <% let count = 1; %>
+                        <% orderData.forEach((data) => { %>
+                            <% data.products.forEach((product) => { %>
+                                <tr>
+                                    <th scope="row" style="padding: 13px;"><%= count %></th>
+                                    
+                                    <td><%= new Date(data.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).replace(/\//g, '-') %></td>
+                        
+                                    <td>₹<%= data.totalAmount %></td>
+                                    <td><%= data.paymentMethod %></td>
+                                    
+                                    <td><%= new Date(data.expectedDelivery).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).replace(/\//g, '-') %></td>
+                            
+                                    <td><%= product.orderStatus %></td>
+                                    <td><%= data.uniqueId %></td>
+                                    <td><a href="/orderDetails?id=<%= data._id %>" class="btn btn-primary">View Details</a></td>
+                                </tr>
+                                <% count++ %>
+                            <% }); %>
+                        <% }); %>
+                    <% } else { %>
+                    <tr>
+                      <td colspan="7" class="text-center">
+                          <div class="error-content text-center">
+                              <div class="container">
+                                  <h1 class="error-title">No Orders</h1>
+                                  <p>You Ordered Nothing.</p>
+                                  <a href="/product" class="btn btn-primary">
+                                      <span>SHOPPING</span>
+                                      <i class="icon-long-arrow-right"></i>
+                                  </a>
+                              </div>
+                          </div>
+                      </td>
+                  </tr>
+                  <% } %>
+                </tbody>
+              </table>
+              
+        </div>
+        <!-- row end -->
+
+                        <!-- store bottom filter -->
+                        <div class="store-filter clearfix">
+                            <span class="store-qty"></span>
+                            <ul class="store-pagination">
+                            <% for(let i=1;i<=totalPages;i++){%>
+                                <% if(currentPage==i){%>
+                                    <li class="active"><a href="?page=<%= i %>"><%= i %></a></li>
+                                    <% }else{ %>
+                                <li><a href="?page=<%= i %>"><%= i %></a></li>
+                                    <% } %>
+        
+                                <% }; %>
+                            </ul>
+                            <!-- <i class="fa fa-angle-right"></i> -->
+                        </div>
+                        <!-- /store bottom filter -->
+
+
+
+    </div>
+    <!-- container end -->
+</div>
+<!-- section end-->
+
+
+      
+
+<%-include('../layout/footer.ejs') %>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+</head>
+<body>
+    <section>
+        <div class="container py-5 ">
+            <div class="row d-flex justify-content-center align-items-center ">
+                <div class="col col-md-8" >
+                    <div class="card shadow" style="border-radius: 1rem;">
+                        <div class="row g-0">
+                            <div class="col-md-6 col-lg-6">
+                                <img src="https://images.unsplash.com/photo-1507668077129-56e32842fceb?auto=format&fit=crop&q=80&w=1374&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                    alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem; height: 100%;" />
+                            </div>
+                            <div class="col-md-6 col-lg-6 d-flex align-items-center" >
+                                <div class="card-body text-black">
+                                    <div class="signup-form" id="form">
+                                        <form class="row login_form" action="register" method="post" id="contactForm" >
+                                            <h2>Sign Up</h2>
+                                            <p>Please fill in this form to create an account!</p>
+                                            <hr>
+                                            <div class="col-md-12 form-group">
+                                                 <input type="text" class="form-control" name="name" placeholder="Username" onblur="validateName()" required>
+                                                 <div id="nameError" class="error-message text-danger"></div>
+                                                 <div class="error-message text-danger"></div>
+                                            </div>
+                                            <div class="col-md-12 form-group">
+                                                 <input type="email" class="form-control" name="email" placeholder="Email" onblur="validateEmail()" required>
+                                                    <p class="text-danger"></p>
+                                                    <div id="emailError" class="error-message text-danger"></div>
+                                                    <!-- <p class="text-center"></p> -->
+
+                                            </div>
+                                            <div class="col-md-12 form-group">
+                                                <input type="tel" class="form-control" name="mobile" placeholder="Mobile Number" onblur="validateMobile()" maxlength="10">
+                                                <div id="mnoError" class="error-message text-danger"></div>
+                                           </div>
+                                            <!-- <div class="col-md-12 form-group">
+                                                 <input type="file" class="form-control"  name="image" required>
+                                            </div> -->
+                                            <div class="col-md-12 form-group">
+                                                <input type="password" class="form-control" name="password" placeholder="Password" onblur="validatePassword()" required>
+                                                <div id="passwordError" class="error-message text-danger"></div>
+                                          </div>
+                                          
+                                          <!-- showPassword -->
+                                          <!-- <div class="form-check" style="margin-left: 10px; margin-bottom: 20px;">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <label class="form-check-label" id="showPassword" for="flexCheckDefault"><small>show password</small></label>
+                                          </div> -->
+                                          <!-- showPassword -->
+                                          
+                                          <div class="col-md-12 form-group">
+                                            <input type="password" class="form-control" name="verify_password" placeholder="Verify Password" onblur="validatePasswordConfirmation(); checkFormValidity()" required>
+                                            <div id="passwordMatchError" class="error-message text-danger"></div>
+                                          </div>
+                                          <div class="col-md-12 form-group">
+                                            <!-- <button type="submit" class="primary-btn" id="submitButton" disabled>Sign Up</button> -->
+                
+                                          </div>
+                                            <div class="col-md-12 form-group">
+                                                 <% if (typeof message !== 'undefined') { %>
+                                                      <p class="text-center text-success"><%= message %><span class="text-danger"><a  href="https://mail.google.com/mail/">Goto Gmail !</a></span><br><br></p>
+                                                      <p class="text-center"></p>
+                                                 <% } %>
+                                                 <button type="submit" class="btn btn-warning btn-lg" id="submitButton"disabled style="background-color: #C70B2C;">Sign Up</button>
+                                                 <!-- <button type="submit" class="primary-btn">Log In</button> -->
+                                                 <!-- <div class="col-md-12 form-group">
+                                                    <button type="submit" class="primary-btn" id="submitButton" disabled>Log In</button>
+                                              </div> -->
+                                              <div class="mt-2 py-2">
+                                                 <a href="#">Forgot Password?</a>
+                                                 <a href="/verification">not verified?</a>
+                                            </div>
+                                            <p class="mb-5 " style="color: #393f81;">
+                                                Already have an account?
+                                                <a href="login" style="color: #3598dc;">Login</a>
+                                              </p>
+                                      </form>
+                                   
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+    </section>
+
+    <script src="/javascripts/checkPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
+    
+    <!-- script for form validation -->
+    <script>
+     
+     function validateName() {
+			const name = document.querySelector('[name="name"]').value.trim();
+			const nameRegex = /^[A-Za-z][A-Za-z\s]*$/;
+			const nameError = document.getElementById('nameError');
+			nameError.textContent = '';
+	
+			if (!nameRegex.test(name)) {
+				nameError.textContent = "Name must start with a letter and can include letters and spaces but not at the beginning.";
+				setTimeout(function () {
+					nameError.textContent = '';
+				}, 3000); // Hide error message after 3 seconds
+			}
+		}
+	
+		function validateEmail() {
+			const email = document.querySelector('[name="email"]').value;
+			const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+			const emailError = document.getElementById('emailError');
+			emailError.textContent = '';
+			if (!emailRegex.test(email)) {
+				emailError.textContent = "Please enter a valid email address.";
+				setTimeout(function () {
+					emailError.textContent = '';
+				}, 3000); // Hide error message after 3 seconds
+			}
+		}
+	
+		function validateMobile() {
+			const mno = document.querySelector('[name="mno"]').value;
+			const mnoRegex = /^\d{10}$/;
+			const mnoError = document.getElementById('mnoError');
+			mnoError.textContent = '';
+	
+			// Check for repetition of four consecutive numbers
+			const consecutiveNumbersRegex = /(\d)\1\1\1/;
+	
+			if (!mnoRegex.test(mno) || consecutiveNumbersRegex.test(mno)) {
+				mnoError.textContent = "Mobile number must be exactly 10 digits and should not include repetition of four consecutive numbers.";
+				setTimeout(function () {
+					mnoError.textContent = '';
+				}, 3000); // Hide error message after 3 seconds
+			}
+		}
+	
+		function validatePassword() {
+			const password = document.querySelector('[name="password"]').value;
+			const passwordError = document.getElementById('passwordError');
+			passwordError.textContent = '';
+	
+			// Regular expression for a strong password
+			const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+	
+			if (!passwordRegex.test(password)) {
+				passwordError.textContent = "Password must be at least 8 characters long and contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character (@ $ ! % * ? &).";
+				setTimeout(function () {
+					passwordError.textContent = '';
+				}, 3000); // Hide error message after 3 seconds
+			}
+		}
+	
+		function validatePasswordConfirmation() {
+			const password = document.querySelector('[name="password"]').value;
+			const verifyPassword = document.querySelector('[name="verify_password"]').value;
+			const passwordMatchError = document.getElementById('passwordMatchError');
+			passwordMatchError.textContent = '';
+	
+			if (password !== verifyPassword) {
+				passwordMatchError.textContent = "Passwords do not match.";
+				setTimeout(function () {
+					passwordMatchError.textContent = '';
+				}, 3000); // Hide error message after 3 seconds
+			}
+		}
+	
+		function checkFormValidity() {
+			const nameError = document.getElementById('nameError').textContent;
+			const emailError = document.getElementById('emailError').textContent;
+			const mnoError = document.getElementById('mnoError').textContent;
+			const passwordError = document.getElementById('passwordError').textContent;
+			const passwordMatchError = document.getElementById('passwordMatchError').textContent;
+	
+			const submitButton = document.getElementById('submitButton');
+			const formIsValid = !(nameError || emailError || mnoError || passwordError || passwordMatchError);
+	
+			if (formIsValid) {
+				submitButton.removeAttribute('disabled');
+				submitButton.classList.add('enabled');
+			} else {
+				submitButton.setAttribute('disabled', 'true');
+				submitButton.classList.remove('enabled');
+			}
+		}
+
+
+        // Handle Server Message
+
+        function handleServerMessages() {
+        // Handle email message
+        const emailMessage = '<%= emailMessage %>';
+        const emailError = document.getElementById('emailError');
+        emailError.textContent = emailMessage;
+
+        if (emailMessage) {
+            setTimeout(function () {
+                emailError.textContent = '';
+            }, 3000); // Hide error message after 3 seconds
+        }
+
+        // Handle mobile message
+        const mobileMessage = '<%= mobileMessage %>';
+        const mnoError = document.getElementById('mnoError');
+        mnoError.textContent = mobileMessage;
+
+        if (mobileMessage) {
+            setTimeout(function () {
+                mnoError.textContent = '';
+            }, 3000); // Hide error message after 3 seconds
+        }
+    }
+
+    // Call this function when the page loads to handle the server-side messages
+    document.addEventListener('DOMContentLoaded', function () {
+        handleServerMessages();
+    });
+
+    </script>
+</body>
+</html>

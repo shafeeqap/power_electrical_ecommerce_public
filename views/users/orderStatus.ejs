@@ -1,0 +1,153 @@
+<%-include('../layout/header.ejs')%>
+
+<%-include('../layout/navigation.ejs')%>
+
+<style>
+  body {
+    /* margin-top: 50px; */
+    background: #eee;
+  }
+
+  .card-body {
+    background: white;
+    height: 250px;
+    border-radius: 10px;
+    margin: 30px;
+  }
+
+  .card-body-status-bar{
+    background: white;
+    height: 200px;
+    border-radius: 10px;
+    margin: 30px;
+    align-items: center;
+  }
+  .order-status-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  .order-status-step {
+    flex: 1;
+    text-align: center;
+    position: relative;
+  }
+  .order-status-circle {
+    width: 30px;
+    height: 30px;
+    background-color: #f8f9fa;
+    border: 2px solid #D10024;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+  }
+  .order-status-text {
+    font-size: 12px;
+    color: black;
+    margin-top: 5px;
+  }
+  .order-status-line {
+    position: absolute;
+    top: 15px;
+    left: calc(50% + 15px);
+    height: 2px;
+    width: calc(100% - 30px);
+    background-color: #D10024;
+    /* z-index: -1; */
+  }
+  .order-status-bar{
+    align-items: center;
+  }
+
+  .col mb-12{
+    margin-top: 80px;
+  }
+
+  .col-md-4{
+    padding: 20px;
+    /* margin-left: 20px; */
+  }
+
+  .row{
+    margin-left: 30px;
+  }
+
+</style>
+
+
+<div class="container">
+  <div class="card">
+    <div class="card-body-status-bar">
+      <div class="row">
+        <div class="col mb-12" style="margin-top: 80px;">
+          <div class="order-status-bar">
+            <div class="order-status-step">
+              <div class="order-status-circle">1</div>
+              <div class="order-status-text">Order Placed</div>
+              <div class="order-status-line"></div>
+            </div>
+            <div class="order-status-step">
+              <div class="order-status-circle">2</div>
+              <div class="order-status-text">Processing</div>
+              <div class="order-status-line"></div>
+            </div>
+            <div class="order-status-step">
+              <div class="order-status-circle">3</div>
+              <div class="order-status-text">Shipped</div>
+              <div class="order-status-line"></div>
+            </div>
+            <div class="order-status-step">
+              <div class="order-status-circle">4</div>
+              <div class="order-status-text">Delivered</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delivery Address Card -->
+  <div class="card">
+    <div class="card-body">
+      <ul class="row">
+        <li class="col-md-4">
+            <figure class="itemside mb-3">
+                <div class="aside"><img src="" class="img-sm border"></div>
+                <figcaption class="info align-self-center">
+                    <p class="title">Dell Laptop with 500GB HDD <br> 8GB RAM</p> <span class="text-muted">$950 </span>
+                </figcaption>
+            </figure>
+        </li>
+        <li class="col-md-4">
+            <figure class="itemside mb-3">
+                <div class="aside"><img src="" class="img-sm border"></div>
+                <figcaption class="info align-self-center">
+                    <p class="title">HP Laptop with 500GB HDD <br> 8GB RAM</p> <span class="text-muted">$850 </span>
+                </figcaption>
+            </figure>
+        </li>
+        <li class="col-md-4">
+            <figure class="itemside mb-3">
+                <div class="aside"><img src="" class="img-sm border"></div>
+                <figcaption class="info align-self-center">
+                    <p class="title">ACER Laptop with 500GB HDD <br> 8GB RAM</p> <span class="text-muted">$650 </span>
+                </figcaption>
+            </figure>
+        </li>
+      <!-- Add your delivery address details here -->
+      <li class="col-md-4">
+      <h5 class="card-title">Delivery Address</h5>
+      <p class="card-text">Your delivery address details go here.</p>
+      </li>
+    </ul>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-PpR/Aa0z1M+Hb2yyVo+CbKA7IxI7pHbxP1RI2i6iE+ydFbGowUxZl2i5lEfg6O6l" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyTq3S1rZ5pa2GpNECI3UAB1EXWBf3cexS" crossorigin="anonymous"></script>
+
+<%-include('../layout/footer.ejs')%>

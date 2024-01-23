@@ -1,0 +1,533 @@
+
+<%- include('../admin/adminLayout/header.ejs')%>
+
+<style>
+   .btn-outline-secondary {
+    width: 160px;
+    margin-top: 30px;
+    margin-right: 10px;
+    /* background-color: #FFCA2C; */
+  }
+
+  .form-control {
+    width: 350px;
+    height: 40px;
+    /* padding-top: 50px; */
+    /* margin-top: 50px; */
+    /* background-color:aliceblue; */
+    border: 1px solid #ced4da;
+  }
+
+  .b,
+  strong {
+    margin-left: 50px;
+  }
+  .element.style{
+    margin-top: 50px;
+  }
+
+
+</style>
+
+
+<!-- saideNaveBar -->
+
+<body class="g-sidenav-show  bg-gray-200">
+  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
+    <div class="sidenav-header" style="margin: 15px;">
+      <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+      <a class="navbar-brand m-0" href="#" target="_blank"></a>
+      <img src="/assets/img/my_Logo.png" class="navbar-brand-img h-100" alt="main_logo">
+      <span class="ms-1 font-weight-bold text-white">Energy Cart</span>
+    </a>
+    </div>
+    <hr class="horizontal light mt-0 mb-2">
+    <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/adminHome">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">dashboard</i>
+            </div>
+            <span class="nav-link-text ms-1">Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="/admin/view-users">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">group</i>
+            </div>
+            <span class="nav-link-text ms-1">Users</span>
+          </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white" href="/admin/view-banner">
+              <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="material-icons opacity-10">add_photo_alternate</i>
+              </div>
+              <span class="nav-link-text ms-1">Banner</span>
+            </a>
+          </li>
+        <li class="nav-item">
+          <a class="nav-link text-white active bg-gradient-primary" href="/admin/view-product">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">inventory_2</i>
+            </div>
+            <span class="nav-link-text ms-1">Product</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link text-white" href="/admin/view-brand">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">branding_watermark</i>
+            </div> 
+            <span class="nav-link-text ms-1">Brand</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href="/admin/view-category">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">category</i>
+            </div>
+            <span class="nav-link-text ms-1">Category</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="/admin/view-offers">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">local_offer</i>
+            </div>
+            <span class="nav-link-text ms-1">Offers</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href="/admin/view-orders">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">wysiwyg</i>
+            </div>
+            <span class="nav-link-text ms-1">Orders</span>
+          </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white " href="/admin/view-coupon">
+              <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="material-icons opacity-10">redeem</i>
+              </div>
+              <span class="nav-link-text ms-1">Coupon</span>
+            </a>
+          </li>
+        <li class="nav-item mt-3">
+          <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href="./pages/profile.html">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">person</i>
+            </div>
+            <span class="nav-link-text ms-1">Profile</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href="/admin/logout">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">logout</i>
+            </div>
+            <span class="nav-link-text ms-1">Log out</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href="./pages/sign-up.html">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">assignment</i>
+            </div>
+            <span class="nav-link-text ms-1">Sign Up</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- <div class="sidenav-footer position-absolute w-100 bottom-0 ">
+      <div class="mx-3">
+        <a class="btn bg-gradient-primary mt-4 w-100" href="https://www.creative-tim.com/product/material-dashboard-pro?ref=sidebarfree" type="button">Upgrade to pro</a>
+      </div>
+    </div> -->
+  </aside>
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    
+    <%- include('../admin/adminLayout/navbar.ejs')%>
+<!-- endSaidNavBar -->
+
+
+
+<div class="container-fluid py-4">
+  <div class="row">
+    <div class="col-12">
+      <div class="card my-4">
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+          <div class="bg-gradient-primary shadow-primary border-radius-lg ">
+            <div class="row justify-content-lg-between align-items-center margin-0 py-0">
+              <div class="col-md-12 col-lg-6 mb-2 mb-lg-0">
+                <h6 class="text-white text-capitalize ps-3"><%= title %></h6>
+              </div>
+              <div class="col-md-12 col-lg-6">
+                <div class="d-flex justify-content-end">
+                  <a class="nav-link text-white " href="/admin/add-product">
+                    <button type="button" class="btn bg-gradient-success ms-3 mt-2">
+                      <i class="material-icons opacity-10">add</i> Add Product
+                    </button>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+       
+
+
+        <div class="card-body px-0 pb-2">
+          <div class="table-responsive p-0">
+            <table class="table align-items-center" id="dtBasicExample">
+              <thead>
+                <tr style="background-color: rgb(227, 225, 225);">
+                  <th class="text-uppercase text-xxs font-weight-bolder  ps-2" style="color: black;">No</th>
+                  <th class="text-uppercase text-xxs font-weight-bolder  ps-2" style="color: black;">Product Name</th>
+                  <th class="text-uppercase text-xxs font-weight-bolder  ps-2" style="color: black;">Category</th>
+                  <th class="text-uppercase text-xxs font-weight-bolder  ps-2" style="color: black;">Brand</th>
+                  <th class="text-uppercase text-xxs font-weight-bolder  ps-2" style="color: black;">Quantity</th>
+                  <th class="text-uppercase text-xxs font-weight-bolder  ps-2" style="color: black;">Description</th>
+                  <th class="text-center text-uppercase text-xxs font-weight-bolder " style="color: black;">Price</th>
+                  <th class="text-uppercase  text-xxs font-weight-bolder  ps-2" style="color: black;">Image</th>
+                  <th class="text-uppercase text-xxs font-weight-bolder  ps-2" style="color: black;">Update</th>
+                  <th class="text-uppercase  text-xxs font-weight-bolder  ps-2" style="color: black;">Status</th>
+                  <th class="text-uppercase  text-xxs font-weight-bolder  ps-2" style="color: black;">Offers</th>
+                  <th class="text-uppercase  text-xxs font-weight-bolder  ps-2" style="color: black;">Action</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <% let counter = 1; %>
+                <% product.forEach(products => { %>
+                  <tr>
+                    <td>
+                      <p class="text-xs font-weight-bold mb-0"><%= counter %></p>
+                    </td>
+                    <td>
+                      <p class="text-xs font-weight-bold mb-0"><%=products.name%></p>
+                    </td>
+                    <td>
+                      
+                      <p class="text-xs font-weight-bold mb-0"><%=products.category.categoryName%></p>
+                      
+                    </td>
+                    <td>
+                      
+                      <p class="text-xs font-weight-bold mb-0"><%= products.brandName.brandName %></p>
+          
+                    </td>
+                    <td>
+                      <p class="text-xs font-weight-bold mb-0"><%=products.qty%></p>
+                    </td>
+                    <td>
+                      <p class="text-xs font-weight-bold mb-0"><%=products.description%></p>
+                    </td>
+                  
+                    <td class="align-middle text-center">
+                      <p class="text-xs font-weight-bold mb-0">&#x20B9;<%=products.price%></p>
+                    </td>
+                    <td>
+                        <img src="/adminAssets/images/<%=products.image[0] %>" class="avatar avatar-sm me-3 border-radius-lg" alt="">
+                    </td>
+                    <td class=" text-sm">
+                      <a href="/admin/edit-product?id=<%=products._id%>">
+                        <span class="badge badge-sm bg-gradient-primary">Edit</span></a>
+                    </td>
+
+                    <!-- Stock/Out of Stock -->
+                    <% if(products.qty<=0){%>
+                    <td>
+                      <p class="text-xs text-danger font-weight-bold mb-0">Out of Stock</p>
+                    </td>
+                    <%}else{%>
+                      <td>
+                        <p class="text-xs text-success font-weight-bold mb-0">Stock</p>
+                      </td>
+                      <%}%>
+                      <td>
+                        <% if(products.offer){%>
+                          <a href="#" onclick="removeProductOffer('<%=products._id%>')"><span class="badge badge-sm bg-gradient-danger">Remove Offer</a></span>
+                          <% }else{%>
+                            <a href="#" class="badge badge-sm bg-gradient-success open-offer-modal" data-bs-toggle="modal" data-bs-target="#offerModal" data-pro-id="<%=products._id%>">Apply offer</a>
+                          <% } %>
+                        </td>
+
+                      <!-- product List/Unlist -->
+                    <% if(products.is_active===true){%>
+                    <td class=" text-sm">
+                      <a href="#" class="badge badge-sm bg-gradient-success list-unlist" data-product-id="<%= products._id %>">List</a>
+                    </td>
+
+                    <% }else{ %>
+                      
+                      <td class=" text-sm">
+                        <a href="#" class="badge badge-sm bg-gradient-danger list-unlist" data-product-id="<%= products._id %>">Unlist</a>
+                      </td>
+                      <% } %>
+                    <!--end product List/Unlist -->
+
+
+                    <% counter++; %>
+                
+                  </tr>
+                <% }); %>
+              </tbody>
+            </table>
+
+           
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!---------------------------------------- modal_disply_offers ---------------------------------------------->
+<div class="modal fade" id="offerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title" id="exampleModalLabel">Offer List</h5>
+           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: black;"></button>
+        </div>
+        <div class="modal-body" id="offer-modal_1">
+         
+          <% availableOffers.forEach((offer)=>{%>
+       
+         <div class="card" style="width: 25rem; background-color: cadetblue;">
+           <!-- <img src="/adminAssets/images/offer_sticker.png" class="card-img-top" alt="..."> -->
+           <div class="card-body custom-card-background" style="height: .25rem;">
+             <h5 class="card-title" style="color: white;"><%=offer.offerName%></h5>
+           </div>
+           <ul class="list-group list-group-flush" style="background-color: rgb(238, 10, 97);">
+             <li class="list-group-item" style="color: black;">Starting Date:<%=offer.startingDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).replace(/\//g, '-')%></li>
+             <li class="list-group-item" style="color: black;">Expiry Date:<%=offer.expiryDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).replace(/\//g, '-')%></li>
+             <li class="list-group-item" style="color: black;">Discount:<%=offer.percentage%>%</li>
+           </ul>
+         </div>
+   
+             <div class="d-flex mt-2">
+               <button type="button" onclick="applyProductOffer('<%= offer._id%>')"  class="btn btn-primary" >Apply</button>
+             </div>
+        <% }); %>
+        
+        <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+   </div>
+  </div>
+</div>
+</div>
+
+<!-- Bootstrap 5 JS bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+<!-- Optional JavaScript -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+
+<!-- jquary for ajax -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<!-- block the product -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var listUnlistLinks = document.querySelectorAll('.list-unlist');
+
+    for (var i = 0; i < listUnlistLinks.length; i++) {
+      listUnlistLinks[i].addEventListener('click', async function (event) {
+        event.preventDefault();
+
+        var productId = this.dataset.productId;
+        var isBlocked = this.classList.contains('bg-gradient-success');
+
+        try {
+          const result = await Swal.fire({
+            title: 'Are you sure?',
+            text: 'You are listing/unlisting the product!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, List/Unlist it!'
+          });
+
+          if (result.isConfirmed) {
+            // using fetch API
+            const response = await fetch(`/admin/is_activeProduct?id=${productId}`, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            });
+
+            const data = await response.json();
+
+            // Handle the response from the server
+            const successAlert = Swal.fire({
+              title: 'List/Unlist!',
+              text: 'The product has been listed/unlisted.',
+              icon: 'success',
+              showConfirmButton: false,
+              timer: 1500
+            });
+
+            // Wait for the success message to close before proceeding
+            await successAlert;
+
+            // Reload the page
+            location.reload();
+
+            // Update the UI based on the response
+            if (isBlocked) {
+              this.classList.remove('bg-gradient-success');
+              this.classList.add('bg-gradient-danger');
+            } else {
+              this.classList.remove('bg-gradient-danger');
+              this.classList.add('bg-gradient-success');
+            }
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          // Close the loading indicator and show an error message
+          Swal.fire({
+            title: 'Error!',
+            text: 'An error occurred while listing/unlisting the product.',
+            icon: 'error'
+          });
+        }
+      });
+    }
+  });
+</script>
+
+  <!-- script for Data Table -->
+<script>
+  $(document).ready(function () {
+      $('#dtBasicExample').DataTable({
+          responsive: true
+      });
+      $('.dataTables_length').addClass('bs-select');
+  });
+</script>
+
+
+<!-- Modal Script -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var openOfferModalButtons = document.querySelectorAll('.open-offer-modal');
+
+    openOfferModalButtons.forEach(function (button) {
+      button.addEventListener('click', function (e) {
+        var productId = button.getAttribute('data-pro-id');
+        updateModalContent(productId);
+      });
+    });
+
+    function updateModalContent(productId) {
+      
+      var modal_1 = document.getElementById('offer-modal_1');
+      modal_1.setAttribute('productId', productId);
+      modalTitle.innerText = 'Offer List for Category ID: ' + productId;
+    }
+  });
+</script>
+
+<script>
+  function applyProductOffer(offerId) {
+    const productId = document.getElementById('offer-modal_1').getAttribute('productId');
+
+    $.ajax({
+      url: '/admin/applyProductOffer',
+      method: 'PATCH',
+      data: { offerId: offerId, productId: productId },
+      success: function (response) {
+        if (response.status) {
+        
+              Swal.fire({
+                icon: "success",
+                title: 'Offer Applied successfully.',
+                showConfirmButton: false,
+                timer: 1500
+            }).then(()=>{
+              location.reload();
+            })
+        }
+      },      
+      error: function () {
+            // Handle the case when the AJAX request encounters an error
+            Swal.fire({
+            title: "Error!",
+            text: "Unable to communicate with the server.",
+            icon: "error"
+          });
+        }
+    });
+  };
+
+  function removeProductOffer(productId){
+
+Swal.fire({
+  title: "Are you sure?",
+  text: "You won't be able to revert this!",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Yes, remove it!"
+}).then((result) => {
+  if (result.isConfirmed) {
+    $.ajax({
+      url: '/admin/removeProductOffer',
+      method: 'PATCH',
+      data: { productId: productId },
+      success: function (response) {
+        if (response.status) {
+          Swal.fire({
+            title: "Removed!",
+            text: "Your file has been removed.",
+            icon: "success"
+          }).then(() => {
+            location.reload();
+          });
+        } else {
+          // Handle the case when deletion is not successful
+          Swal.fire({
+            title: "Error!",
+            text: "Unable to delete the file.",
+            icon: "error"
+          });
+        }
+      },
+      error: function () {
+        // Handle the case when the AJAX request encounters an error
+        Swal.fire({
+          title: "Error!",
+          text: "Unable to communicate with the server.",
+          icon: "error"
+        });
+      }
+    });
+  }
+});
+
+}
+  </script>
+
+
+<%- include('../admin/adminLayout/footer.ejs') %>

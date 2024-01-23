@@ -1,0 +1,137 @@
+<%- include('../layout/header.ejs') %>
+<%- include('../layout/navigation.ejs') %>
+
+
+
+<div class="container mt-5" style="margin-top: 50px; margin-bottom: 50px;">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <form action="#" method="post" onsubmit="return validateForm()">
+                        <div class="form-group">
+                            <input class="input" type="text" id="FullName" name="fullName" placeholder="Full name" value="<%=address.fullName%>">
+                            <span class="error-message text-danger" id="fullNameError"></span>
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="text" id="city" name="city" placeholder="City" value="<%=address.city%>">
+                            <span class="error-message text-danger" id="cityError"></span>
+                            
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="text" id="country" name="country" placeholder="Country" value="<%=address.country%>">
+                            <span class="error-message text-danger" id="countryError"></span>
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="text" id="pinCode" name="pincode" placeholder="Pin Code" value="<%=address.pincode%>">
+                            <span class="error-message text-danger" id="pinCodeError"></span>
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="text" id="state" name="state" placeholder="State" value="<%=address.state%>">
+                            <span class="error-message text-danger" id="stateError"></span>
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="tel" id="mobile" name="mobile" placeholder="Mobile" value="<%=address.mobile%>">
+                            <span class="error-message text-danger" id="phoneError"></span>
+                        </div>
+                        <!-- Submit Button -->
+                        <div class="d-flex justify-content-between" style="display: flex; justify-content: space-around;">
+                            <button type="submit" class="btn btn-primary" style="width: 30%;">Submit</button>
+                            <button type="button" class="btn btn-danger" style="width: 30%;" onclick="cancelAction()">Cancel</button>
+                            <input type="hidden" name="id" value="<%=address._id%>">
+                          </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function validateForm() {
+        var fullName = document.getElementById("FullName").value;
+        var country = document.getElementById("country").value;
+        var city = document.getElementById("city").value;
+        var state = document.getElementById("state").value;
+        var pincode = document.getElementById("pinCode").value;
+        var mobile = document.getElementById("mobile").value.trim();
+
+        // Function to display an error message
+        function showError(inputElement, errorMessage, errorId) {
+            var errorElement = document.getElementById(errorId);
+            errorElement.innerHTML = errorMessage;
+            errorElement.style.display = "block";
+        }
+
+        // Function to hide the error message
+        function hideError(errorId) {
+            var errorElement = document.getElementById(errorId);
+            errorElement.innerHTML = "";
+            errorElement.style.display = "none";
+        }
+
+        // Validation for Full Name (non-empty)
+        if (fullName === "") {
+            showError(document.getElementById("FullName"), "Full Name must be filled out", "fullNameError");
+            return false;
+        } else {
+            hideError("fullNameError"); // Hide the error if the field is not empty
+        }
+
+        // Validation for Country (non-empty)
+        if (country === "") {
+            showError(document.getElementById("country"), "Country must be filled out", "countryError");
+            return false;
+        } else {
+            hideError("countryError"); // Hide the error if the field is not empty
+        }
+
+        // Validation for City (non-empty)
+        if (city === "") {
+            showError(document.getElementById("city"), "City must be filled out", "cityError");
+            return false;
+        } else {
+            hideError("cityError"); // Hide the error if the field is not empty
+        }
+
+        // Validation for State (non-empty)
+        if (state === "") {
+            showError(document.getElementById("state"), "State must be filled out", "stateError");
+            return false;
+        } else {
+            hideError("stateError"); // Hide the error if the field is not empty
+        }
+
+        // Validation for Pin Code (non-empty, only numbers)
+        var pinCodePattern = /^\d+$/;
+        if (pincode === "") {
+            showError(document.getElementById("pinCode"), "Pin Code must be filled out", "pinCodeError");
+            return false;
+        } else if (!pinCodePattern.test(pincode)) {
+            showError(document.getElementById("pinCode"), "Pin Code should only contain numbers", "pinCodeError");
+            return false;
+        } else {
+            hideError("pinCodeError"); // Hide the error if the field is not empty and valid
+        }
+
+        // Validation for Mobile Number (10 digits with the pattern "1111111111")
+        var mobilePattern = /^\d{10}$/;
+        if (!mobile.match(mobilePattern)) {
+            showError(document.getElementById("mobile"), "Mobile Number should be 10 digits in the format '1111111111'", "phoneError");
+            return false;
+        } else {
+            hideError("phoneError"); // Hide the error if the field is valid
+        }
+
+        return true; // Form is valid
+    }
+
+    // function Cancel Button  
+    function cancelAction() {
+        
+    // document.getElementById("editAddress").reset();
+    window.history.back(); 
+    }
+</script>
+
+<%- include('../layout/footer.ejs') %>
