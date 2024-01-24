@@ -377,7 +377,7 @@ const loadHome = async(req,res)=>{
         const userData = await User.find({is_block:false});
         const banner = await Banner.find({status:true});
         
-        console.log(productData);
+        
         
         if (!user) {
             return res.redirect('/login');
@@ -453,7 +453,7 @@ const productLoad = async(req,res)=>{
             ]
         }).countDocuments()
 
-        console.log('productData',productData);
+    
         res.render('product', {
             user,
             productData,
