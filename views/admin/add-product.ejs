@@ -181,7 +181,7 @@
                             <div class="col md-3 py-4">
                                 <label for="exampleFormControlTextarea1">Upload Images</label>
                                 <div class="form-group">
-                                    <input type="file" name="image" id="image" multiple accept="image/*">
+                                    <input type="file" name="image" id="image" multiple accept="image/*" required>
                                     <div class="image-preview-container mt-2" style="width: 100px;"></div>
                                     <div id="imageError" class="error-message text-danger"></div>
                                   </div>
@@ -210,9 +210,9 @@
       if (productName.length < 3) {
           productNameError.textContent = "Product name must be at least 3 characters long.";
 
-          setTimeout(()=>{
-            productNameError.textContent = "";
-          },5000)
+          // setTimeout(()=>{
+          //   productNameError.textContent = "";
+          // },5000)
       }
   }
 
@@ -221,13 +221,13 @@
     const categoryError = document.getElementById('categoryError');
     categoryError.textContent = '';
 
-    if(category.value === "" || category.value === null){
+    if(category.value === "" ){
       categoryError.textContent = "Please select your category"
     }
 
-    setTimeout(()=>{
-      categoryError.textContent = "";
-    },5000);
+    // setTimeout(()=>{
+    //   categoryError.textContent = "";
+    // },5000);
 
   }
 
@@ -239,9 +239,9 @@
       if (isNaN(price) || price < 0 || price==="") {
           priceError.textContent = "Price must be a non-negative numeric value.";
 
-          setTimeout(()=>{
-            priceError.textContent = "";
-          },5000)
+          // setTimeout(()=>{
+          //   priceError.textContent = "";
+          // },5000)
       }
   }
 
@@ -253,9 +253,9 @@
     if(brandName.value === null || brandName.value === ""){
       brandError.textContent = "Please select your brand.";
 
-      setTimeout(()=>{
-        brandError.textContent = "";
-      },5000);
+      // setTimeout(()=>{
+      //   brandError.textContent = "";
+      // },5000);
     }
   }
 
@@ -267,27 +267,27 @@
       if (isNaN(quantity) || quantity < 5) {
           quantityError.textContent = "Quantity must be a numeric value of at least 5.";
 
-          setTimeout(()=>{
-            quantityError.textContent = "";
-          },5000)
+          // setTimeout(()=>{
+          //   quantityError.textContent = "";
+          // },5000)
       }
   }
 
   // function validateDisc
 
-  function validateImage(){
-    const image = document.getElementById('image');
-    const imageError = document.getElementById('imageError');
-    imageError.textContent = "";
+  // function validateImage(){
+  //   const image = document.getElementById('image');
+  //   const imageError = document.getElementById('imageError');
+  //   imageError.textContent = "";
 
-    if(image.value === "" || image.value === null){
-      imageError.textContent = "Please select your image.";
+  //   if(image.value === ""){
+  //     imageError.textContent = "Please select your image.";
 
-      setTimeout(()=>{
-        imageError.textContent = "";
-      },5000);
-    }
-  }
+      // setTimeout(()=>{
+      //   imageError.textContent = "";
+      // },5000);
+  //   }
+  // }
 
   document.addEventListener('DOMContentLoaded', function () {
       const inputImage = document.getElementById('image');
