@@ -48,13 +48,13 @@ const sendVerifyMail= async(email, otp)=>{
             secure:false,
             requireTLS:true,
             auth:{
-                user:config.emailUser,
-                pass:config.passwordUser
+                user:process.env.emailUser,
+                pass:process.env.passwordUser
             }
         });
 
         const mailoption={
-            from:config.emailUser,
+            from:process.env.emailUser,
             to:email,
             subject:'For OTP Vrification mail',
             html: `<p> Hi , your OTP is <strong>${otp}</strong>.</p> `,
@@ -282,12 +282,12 @@ const sendResetPasswordMail= async(name,email,token)=>{
             secure:false,
             requireTLS:true,
             auth:{
-                user:config.emailUser,
-                pass:config.passwordUser
+                user:process.env.emailUser,
+                pass:process.env.passwordUser
             }
         });
         const mailoption={
-            from:config.emailUser,
+            from:process.env.emailUser,
             to:email,
             subject:'For Reset Password',
             html:'<p> Hi '+ name +', please click here to <a href="http://localhost:3000/reset-password?token='+token+'"> Reset </a> your password.</p> '
