@@ -6,7 +6,7 @@ const user_router = express();
 
 const session = require('express-session');
 
-const config = require('../config/config');
+
 
 //------------------------------------------------------------//
 const userController = require('../controller/userController');

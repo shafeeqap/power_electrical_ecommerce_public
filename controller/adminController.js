@@ -4,7 +4,7 @@ const Order = require('../models/orderModel');
 const Product = require('../models/productModel');
 const bcrypt = require('bcrypt');
 const randomstring = require('randomstring');
-const config = require('../config/config');
+
 const nodemailer = require('nodemailer');
 const { now } = require('mongoose');
 const { query } = require('express');

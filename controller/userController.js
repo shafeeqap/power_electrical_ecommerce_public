@@ -14,7 +14,7 @@ const crypto = require('crypto');
 const { ObjectId } = require('mongodb');
 const Banner = require('../models/bannerModel');
 
-const config = require('../config/config');
+
 
 
 var instance = new Razorpay({
