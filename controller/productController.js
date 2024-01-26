@@ -122,7 +122,9 @@ const editProductLoad = async(req,res)=>{
             title:'Edit Product',
             productData,
             category,
-            brandData});
+            brandData
+        });
+
     } catch (error) {
         console.log(error);
     }
@@ -132,6 +134,7 @@ const editProductLoad = async(req,res)=>{
 const editProduct = async(req,res)=>{
     try {
         const id = req.body.id;
+        console.log('request body',req.body);
 
         const productName = req.body.productName;
         const categoryName = req.body.category;
@@ -186,7 +189,7 @@ const editProduct = async(req,res)=>{
                 is_active:req.body.is_active
             }},{new:true});
 
-        
+        console.log('updatedData',updatedData);
 
             if(updatedData){
                 res.redirect('/admin/view-product');

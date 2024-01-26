@@ -254,7 +254,7 @@
 
     function validateForm() {
       const productName = document.getElementById('productName').value.trim();
-      const price = document.getElementById('price').value;
+      const price = parseFloat(document.getElementById('price').value);
       const quantity = document.getElementById('quantity').value;
 
       const productNameError = document.getElementById('productNameError');

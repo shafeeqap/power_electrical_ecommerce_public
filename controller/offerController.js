@@ -4,58 +4,15 @@ const Offer = require('../models/offerModel');
 //------------------------------------------- Load View Offer Page ------------------------------------------//
 const loadViewOffer = async (req, res) => {
     try {
-        // Search
-        let search = '';
-        if (req.query.search) {
-            search = req.query.search;
-        }
+       
 
-        // Pagination
-        let page = 1;
-        if (req.query.page) {
-            page = parseInt(req.query.page);
-        }
-
-        const limit = 6;
-
-        // MongoDB Query
-        const query = {
-            $or: [
-                { offerName: { $regex: new RegExp(search, 'i') } },
-                // { status: { $regex: new RegExp(search, 'i') } },
-                { percentage: parseInt(search) || 0 },
-            ],
-        };
         
+        const offerData = await Offer.find();
 
-        // Check if the search string is a valid date
-        if (!isNaN(new Date(search))) {
-            query.$or.push(
-                { startingDate: { $gte: new Date(search) } },
-                { expiryDate: { $gte: new Date(search) } }
-            );
-        } else {
-            // If it's not a valid date, try to parse as a number for the percentage field
-            const parsedPercentage = parseInt(search);
-            if (!isNaN(parsedPercentage)) {
-                query.$or.push({ percentage: parsedPercentage });
-            }
-        }
-
-        // Fetching Offer Data
-        const offerData = await Offer.find(query)
-            .limit(limit)
-            .skip(Math.max((page - 1) * limit, 0))
-            .exec();
-
-        // Count
-        const count = await Offer.countDocuments(query);
         res.render('view-offers', {
             title: 'View Offers',
             offerData: offerData,
-            now: new Date(),
-            totalPages: Math.ceil(count / limit),
-            currentPage: page,
+            now: new Date()
         });
 
 

@@ -170,13 +170,13 @@
     
                               </div>
                         </div>
-                        <!-- <div class="col md-3 py-4"> -->
+                        <div class="col md-3 py-4">
                             <div class="form-group">
                                 <div class="form-label rounded">New Image</div>
                                 <input type="file" name="image" id="image" multiple accept="image/*"onchange="viewImage(event)">
-                                <div class="image-preview-container mt-2"></div>
+                                <div class="image-preview-container-2 mt-2" style="width: 100px;"></div>
                               </div>
-                        <!-- </div> -->
+                        </div>
                           <div class="form-check py-4">
                             <div class="form-label rounded">Action</div>
                             <input class="form-check-input"  type="radio" name="is_block" value="1" <% if(categoryData.is_block==true){%> checked <%}%> >
@@ -213,6 +213,59 @@
       }
     }
 
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('formId');
+    const inputImage = document.getElementById('image');
+    const previewContainer = document.querySelector('.image-preview-container-2');
+
+    inputImage.addEventListener('change', function () {
+      displayImages();
+    });
+
+    function displayImages() {
+          Array.from(inputImage.files).forEach(function (file) {
+              const reader = new FileReader();
+
+              reader.onload = function () {
+                  const imagePreview = document.createElement('div');
+                  imagePreview.classList.add('image-preview');
+
+                  const image = document.createElement('img');
+                  image.src = reader.result;
+                  image.classList.add('img-fluid');
+
+                  const removeButton = document.createElement('button');
+                  removeButton.type = 'button';
+                  removeButton.classList.add('remove-button');
+
+                  const icon = document.createElement('i');
+                  icon.classList.add('fas', 'fa-trash-alt');
+
+                  removeButton.appendChild(icon);
+                  removeButton.addEventListener('click', function () {
+                      imagePreview.remove();
+                      const dt = new DataTransfer();
+                      Array.from(inputImage.files).forEach(function (existingFile) {
+                          if (existingFile !== file) {
+                              dt.items.add(existingFile);
+                          }
+                      });
+                      inputImage.files = dt.files;
+                  });
+
+                  imagePreview.appendChild(image);
+                  imagePreview.appendChild(removeButton);
+                  previewContainer.appendChild(imagePreview);
+              };
+
+              reader.readAsDataURL(file);
+          });
+      }
+
+    })
 </script>
 
 <%-include('../admin/adminLayout/footer.ejs')%>

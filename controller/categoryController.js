@@ -2,6 +2,8 @@ const { default: mongoose } = require('mongoose');
 const Category = require('../models/categoryModel');
 const Offer = require('../models/offerModel');
 const Product = require('../models/productModel');
+const path = require('path');
+const sharp = require('sharp');
 const { json } = require('express');
 
 //--------------------------------------------- View Category Page------------------------------------//
@@ -74,33 +76,44 @@ const addCategoryLoad = async(req,res)=>{
 };
 
 //------------------------------------------------- Add new category -----------------------------//
-const addCategory = async(req,res)=>{
+const addCategory = async (req, res) => {
     try {
-        const categoryName=req.body.categoryName;
-        const description=req.body.description;
-        const image=req.file.filename;
+        const categoryName = req.body.categoryName;
+        const description = req.body.description;
+        let images = ''; 
 
-        const category=new Category({
-            categoryName:categoryName,
-            description:description,
-            image:image
-        
-        })
+        if (req.file) {
+            const filename = req.file.filename;
+
+            // Resize image to 300x300 pixels
+            await sharp(path.join(__dirname, '../public/adminAssets/images', filename))
+                .resize(300, 300)
+                .toFile(path.join(__dirname, '../public/adminAssets/images', 'resized-' + filename));
+
+            images = 'resized-' + filename;
+        }
+
+        const category = new Category({
+            categoryName: categoryName,
+            description: description,
+            image: images
+        });
+
         const categoryData = await category.save();
-       
 
-        if(categoryData){
-            
+        if (categoryData) {
             res.redirect('/admin/view-category');
-        }else{
-        
-            res.render('/admin/add-category',{title:'Something Wrong'});
+        } else {
+            res.render('/admin/add-category', { title: 'Something Wrong' });
         }
     } catch (error) {
         console.log(error);
         res.status(500).send('Server error');
     }
-}
+};
+
+
+
 
 //--------------------------------------------------- Edit Category Load ---------------------------------------//
 const editCategoryLoad = async(req,res)=>{
@@ -124,30 +137,54 @@ const editCategoryLoad = async(req,res)=>{
 }
 
 //-------------------------------------------------------- Update Category --------------------------------------//
-const updateCategory = async(req,res)=>{
+const updateCategory = async (req, res) => {
     try {
-        
         const id = req.body.id;
-    
-        const categoryData = await Category.findByIdAndUpdate({_id:id},
-            {$set:{
-                categoryName:req.body.category,
-                description:req.body.description,
-                image:req.file.filename,
-                is_block: req.body.is_block,
-            }});
-            
-            if(categoryData){
-                res.redirect('/admin/view-category');
-            }else{
-                res.render('edit-category');
+        let images = '';
+
+        if (req.file) {
+            const filename = req.file.filename;
+
+            // Resize image to 300x300 pixels
+            await sharp(path.join(__dirname, '../public/adminAssets/images', filename))
+                .resize(300, 300)
+                .toFile(path.join(__dirname, '../public/adminAssets/images', 'resized-' + filename));
+
+            images = 'resized-' + filename;
+        } else {
+            // No new files uploaded, maintain existing image
+            const existingCategory = await Category.findOne({ _id: id });
+
+            if (existingCategory && existingCategory.image) {
+                // If there is an existing image, use it
+                images = existingCategory.image;
             }
             
+        }
 
+        const categoryData = await Category.findByIdAndUpdate(
+            { _id: id },
+            {
+                $set: {
+                    categoryName: req.body.category,
+                    description: req.body.description,
+                    image: images, 
+                    is_block: req.body.is_block,
+                },
+            }
+        );
+
+        if (categoryData) {
+            res.redirect('/admin/view-category');
+        } else {
+            res.render('edit-category');
+        }
     } catch (error) {
         console.log(error);
+        res.status(500).send('Server error');
     }
-}
+};
+
 
 //--------------------------------------------- Category List/Unlist ---------------------------------------//
 const categoryListorUnlist = async(req,res)=>{
