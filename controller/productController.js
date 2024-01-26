@@ -111,12 +111,18 @@ const editProductLoad = async(req,res)=>{
     try {
         const id = req.query.id; 
         
-        const productData = await Product.findById({_id:id});
+        const productData = await Product.findById({_id:id})
+        .populate('category')
+        .populate('brandName')
         
         const category = await Category.find();
         
         const brandData = await Brand.find();
-        res.render('edit-product',{title:'Edit Product',productData,category,brandData});
+        res.render('edit-product',{
+            title:'Edit Product',
+            productData,
+            category,
+            brandData});
     } catch (error) {
         console.log(error);
     }

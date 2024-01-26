@@ -119,6 +119,10 @@ const placeOrder = async(req, res)=>{
             'cancelOrderStatus.reason':'none'
         }))
 
+        if(!address){
+            return res.json({success:false, message:"Please add your shipping address"})
+        }
+
         const order = new Order({
             deliveryDetails:address,
             uniqueId:uniNum,

@@ -1,7 +1,7 @@
 
 <%- include('../admin/adminLayout/header.ejs')%>
 
-<style>
+<!-- <style>
    .btn-outline-secondary {
     width: 160px;
     margin-top: 30px;
@@ -27,7 +27,7 @@
   }
 
 
-</style>
+</style> -->
 
 
 <!-- saideNaveBar -->
@@ -328,6 +328,10 @@
   </div>
 </div>
 </div>
+<%- include('../admin/adminLayout/footer.ejs') %>
+
+<!-- jquary for ajax -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <!-- Bootstrap 5 JS bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -341,8 +345,7 @@
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
 
-<!-- jquary for ajax -->
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 
 <!-- block the product -->
 <script>
@@ -417,13 +420,13 @@
 </script>
 
   <!-- script for Data Table -->
-<script>
-  $(document).ready(function () {
-      $('#dtBasicExample').DataTable({
-          responsive: true
-      });
-      $('.dataTables_length').addClass('bs-select');
-  });
+  <script>
+    $(document).ready(function () {
+        $('#dtBasicExample').DataTable({
+            responsive: true
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
 </script>
 
 
@@ -530,4 +533,4 @@ Swal.fire({
   </script>
 
 
-<%- include('../admin/adminLayout/footer.ejs') %>
+

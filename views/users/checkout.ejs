@@ -448,14 +448,25 @@
               showCancelButton: false,
               timer: 1500,
             });
+
+        }else if(response.message){
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: response.message,
+            });
           } else {
             razorPayment(response.order);
             console.log('Order:', response.order);
-          }
+          }e
         },
       });
     });
   });
+
+
+
+
 
 //  -------------------------------------- Razorpay ---------------------------------//
   function razorPayment(order) {

@@ -151,7 +151,7 @@
                             <select class="option-value"  id="categoryName" name="category">
                                 <!-- <option disabled selected>Choose Category</option> -->
                                   <% category.forEach(cat => { %>
-                                    <option value="<%=cat.categoryName%>" ><%= cat.categoryName%></option>
+                                    <option value="<%=cat._id%>" ><%= cat.categoryName%></option>
                                     <% }); %>
                                   </select>
                                 </div>
@@ -163,7 +163,7 @@
                             <select class="option-value"  id="brand" name="brand">
                               <!-- <option disabled selected>Choose Category</option> -->
                                 <% brandData.forEach(brand => { %>
-                                  <option class="option" value="<%=brand.brandName%>" ><%= brand.brandName %></option>
+                                  <option class="option" value="<%=brand._id%>" ><%= brand.brandName %></option>
                                   <% }); %>
                                 </select>
                               </div>

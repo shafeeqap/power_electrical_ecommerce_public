@@ -117,7 +117,7 @@
               </div>
               <div class="card-body px-0 pb-2">
                   <div class="container-fluid">
-                      <form class="form-sample" action="/admin/add-product" enctype="multipart/form-data" method="post">
+                      <form class="form-sample" action="/admin/add-product" enctype="multipart/form-data" method="post" id="formId">
                           <div class="row">
                               <div class="col py-4">
                                   <div class="form-group">
@@ -183,7 +183,6 @@
                                 <div class="form-group">
                                     <input type="file" name="image" id="image" multiple accept="image/*" required>
                                     <div class="image-preview-container mt-2" style="width: 100px;"></div>
-                                    <div id="imageError" class="error-message text-danger"></div>
                                   </div>
                             </div>
                         </div>
@@ -201,103 +200,19 @@
   </div>
 </div>
 
+
+
 <script>
-  function validateProductName() {
-      const productName = document.getElementById('productName').value.trim();
-      const productNameError = document.getElementById('productNameError');
-      productNameError.textContent = '';
-
-      if (productName.length < 3) {
-          productNameError.textContent = "Product name must be at least 3 characters long.";
-
-          // setTimeout(()=>{
-          //   productNameError.textContent = "";
-          // },5000)
-      }
-  }
-
-  function validateCategory(){
-    const category = document.getElementById('category');
-    const categoryError = document.getElementById('categoryError');
-    categoryError.textContent = '';
-
-    if(category.value === "" ){
-      categoryError.textContent = "Please select your category"
-    }
-
-    // setTimeout(()=>{
-    //   categoryError.textContent = "";
-    // },5000);
-
-  }
-
-  function validatePrice() {
-      const price = document.getElementById('price').value;
-      const priceError = document.getElementById('priceError');
-      priceError.textContent = '';
-
-      if (isNaN(price) || price < 0 || price==="") {
-          priceError.textContent = "Price must be a non-negative numeric value.";
-
-          // setTimeout(()=>{
-          //   priceError.textContent = "";
-          // },5000)
-      }
-  }
-
-  function validateBrandName(){
-    const brandName = document.getElementById('brandName');
-    const brandError = document.getElementById('brandError');
-    brandError.textContent= '';
-
-    if(brandName.value === null || brandName.value === ""){
-      brandError.textContent = "Please select your brand.";
-
-      // setTimeout(()=>{
-      //   brandError.textContent = "";
-      // },5000);
-    }
-  }
-
-  function validateQuantity() {
-      const quantity = document.getElementById('quantity').value;
-      const quantityError = document.getElementById('quantityError');
-      quantityError.textContent = '';
-
-      if (isNaN(quantity) || quantity < 5) {
-          quantityError.textContent = "Quantity must be a numeric value of at least 5.";
-
-          // setTimeout(()=>{
-          //   quantityError.textContent = "";
-          // },5000)
-      }
-  }
-
-  // function validateDisc
-
-  // function validateImage(){
-  //   const image = document.getElementById('image');
-  //   const imageError = document.getElementById('imageError');
-  //   imageError.textContent = "";
-
-  //   if(image.value === ""){
-  //     imageError.textContent = "Please select your image.";
-
-      // setTimeout(()=>{
-      //   imageError.textContent = "";
-      // },5000);
-  //   }
-  // }
-
   document.addEventListener('DOMContentLoaded', function () {
-      const inputImage = document.getElementById('image');
-      const previewContainer = document.querySelector('.image-preview-container');
+    const form = document.getElementById('formId');
+    const inputImage = document.getElementById('image');
+    const previewContainer = document.querySelector('.image-preview-container');
 
-      inputImage.addEventListener('change', function () {
-          displayImages();
-      });
+    inputImage.addEventListener('change', function () {
+      displayImages();
+    });
 
-      function displayImages() {
+    function displayImages() {
           Array.from(inputImage.files).forEach(function (file) {
               const reader = new FileReader();
 
@@ -337,28 +252,47 @@
           });
       }
 
-      document.getElementById('productName').addEventListener('blur', validateProductName);
-      document.getElementById('category').addEventListener('blur', validateCategory);
-      document.getElementById('price').addEventListener('blur', validatePrice);
-      document.getElementById('brandName').addEventListener('blur', validateBrandName);
-      document.getElementById('quantity').addEventListener('blur', validateQuantity);
-      document.getElementById('image').addEventListener('blur', validateImage);
+    function validateForm() {
+      const productName = document.getElementById('productName').value.trim();
+      const price = document.getElementById('price').value;
+      const quantity = document.getElementById('quantity').value;
 
-      document.querySelector('.form-sample').addEventListener('submit', function (event) {
-          event.preventDefault();
-          validateProductName();
-          validateCategory();
-          validatePrice();
-          validateBrandName();
-          validateQuantity();
-          validateImage();
+      const productNameError = document.getElementById('productNameError');
+      const priceError = document.getElementById('priceError');
+      const quantityError = document.getElementById('quantityError');
 
-          if (document.querySelectorAll('.error-message').length === 0) {
-              this.submit();
-          }
-      });
+      productNameError.textContent = '';
+      priceError.textContent = '';
+      quantityError.textContent = '';
+
+      let isValid = true;
+
+      if (productName.length < 3) {
+        productNameError.textContent = "Product name must be at least 3 characters long.";
+        isValid = false;
+      }
+
+      if (isNaN(price) || price < 0) {
+        priceError.textContent = "Price must be a non-negative numeric value.";
+        isValid = false;
+      }
+
+      if (isNaN(quantity) || quantity < 5) {
+        quantityError.textContent = "Quantity must be a numeric value of at least 5.";
+        isValid = false;
+      }
+
+      return isValid;
+    }
+
+    form.addEventListener('submit', function (event) {
+      if (!validateForm()) {
+        event.preventDefault();
+      }
+    });
   });
 </script>
+
 
 
 <%- include('../admin/adminLayout/footer.ejs') %>
