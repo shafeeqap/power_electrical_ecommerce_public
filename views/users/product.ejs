@@ -192,7 +192,8 @@
                                 <h4 class="product-price">₹ <%=product.discountedPrice%>
                                     <del class="product-old-price">₹ <%=product.price%></del></h4>
                                     <% }else if(product.category.offer){ %>
-                                        <h4 class="product-price">₹ <%=product.categoryDiscountedPrice%></h4>
+                                        <h4 class="product-price">₹ <%=product.categoryDiscountedPrice%>
+                                            <del class="product-old-price">₹ <%=product.price%></del></h4>
                                         <% }else{ %>
                                             <h4 class="product-price">₹ <%=product.price%></h4>
                                             <% }%>

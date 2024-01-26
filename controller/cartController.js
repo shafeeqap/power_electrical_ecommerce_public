@@ -173,7 +173,8 @@ const cartQuantity = async(req, res)=>{
 
         console.log('updatedQuantity',updatedQuantity);
 
-        const productPrice = stockAvailable.price;
+        // const productPrice = stockAvailable.price;
+        const productPrice = updatedProduct.price;
    
         const productTotal = productPrice*updatedQuantity
        

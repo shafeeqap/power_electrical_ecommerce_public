@@ -5,6 +5,7 @@ const Offer = require('../models/offerModel')
 const path = require('path');
 const sharp = require('sharp');
 const fs = require('fs');
+const { log } = require('console');
 
 
 
@@ -116,8 +117,9 @@ const editProductLoad = async(req,res)=>{
         .populate('brandName')
         
         const category = await Category.find();
-        
         const brandData = await Brand.find();
+        
+
         res.render('edit-product',{
             title:'Edit Product',
             productData,
@@ -134,15 +136,13 @@ const editProductLoad = async(req,res)=>{
 const editProduct = async(req,res)=>{
     try {
         const id = req.body.id;
-        console.log('request body',req.body);
-
+    
         const productName = req.body.productName;
         const categoryName = req.body.category;
         const brandName = req.body.brand;
         const qty = req.body.qty;
         const description = req.body.description;
         const price = req.body.price;
-
         
         let image = [];
 
@@ -180,7 +180,7 @@ const editProduct = async(req,res)=>{
             {_id:id},
             {$set:{
                 name:productName,
-                categoryName:categoryName,
+                category:categoryName,
                 brandName:brandName,
                 qty:qty,
                 description:description,
@@ -189,7 +189,6 @@ const editProduct = async(req,res)=>{
                 is_active:req.body.is_active
             }},{new:true});
 
-        console.log('updatedData',updatedData);
 
             if(updatedData){
                 res.redirect('/admin/view-product');

@@ -118,7 +118,11 @@
           </div>
           <div class="card-body px-0 pb-2">
             <div class="container-fluid">
-            <form action="/admin/add-category" enctype="multipart/form-data" method="post" id="form"> 
+            <form action="/admin/add-category" enctype="multipart/form-data" method="post" id="form">
+              
+              <% if (typeof message !== 'undefined') { %>
+                <p id="message" class="text-center text-danger general-message" style="background-color: yellow;"><%= message %></p>
+              <% } %>
   
                 <div class="row">
                     <div class="col-md-3 py-4">

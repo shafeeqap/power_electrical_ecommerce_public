@@ -92,20 +92,26 @@ const addCategory = async (req, res) => {
 
             images = 'resized-' + filename;
         }
+        const existCategory = await Category.findOne({categoryName:categoryName});
+        if(existCategory){
+            res.render('add-category',{
+                message:'Category already existing',
+                title:'add-category'
+            })
+        }else{
 
-        const category = new Category({
-            categoryName: categoryName,
-            description: description,
-            image: images
+            const category = new Category({
+                categoryName: categoryName,
+                description: description,
+                image: images
         });
 
         const categoryData = await category.save();
 
-        if (categoryData) {
-            res.redirect('/admin/view-category');
-        } else {
-            res.render('/admin/add-category', { title: 'Something Wrong' });
-        }
+        res.redirect('/admin/view-category');
+    }
+        
+
     } catch (error) {
         console.log(error);
         res.status(500).send('Server error');
