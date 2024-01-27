@@ -28,11 +28,14 @@ const loadCheckOut = async(req,res)=>{
 
         const cartData = await Cart.findOne({userId:userId}).populate("products.productId").exec();
        
+        console.log('cartData',cartData);
+
         const couponData = await Coupon.find({status:true});
 
 
         if (!cartData || !cartData.products) {
             console.log('Cart data or products not found');
+
             return res.status(400).send('Cart data or products not found');
         }
 
@@ -437,11 +440,14 @@ const orderDetails = async(req, res)=>{
         
         const userId = req.session.user_id
         const userData = await User.findOne({_id:userId})
-        const orderData = await Order.findOne({_id:id}).populate('products.productId');
+        const orderData = await Order.findOne({_id:id}).populate('products.productId')
         
+        console.log('orderData',orderData);
         
-
-        res.render('orderDetails',{user:userData, orders:orderData})
+        res.render('orderDetails',{
+            user:userData,
+            orders:orderData
+        })
         
     } catch (error) {
         console.log(error);

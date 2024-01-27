@@ -211,14 +211,14 @@
                     <td>
                     <% if (cat.offer) { %>
                         <!-- Display status if offer is active -->
-                        <span class="<% if (active === 'Active') { %> text-success
-                            <% } else if (active === 'Upcoming') { %> text-warning
-                            <% } else { %> text-primary<% } %>">
+                        <span class="<% if (active === 'Active') { %> text-success text-sm
+                            <% } else if (active === 'Upcoming') { %> text-warning text-sm
+                            <% } else { %> text-primary text-sm<% } %>">
                             <%= active %>
                         </span>
                     <% } else { %>
                         <!-- Display 'Cancelled' if offer is not active -->
-                        <span class="text-danger">Cancelled</span>
+                        <span class="text-info text-sm">No Offer Appllied</span>
                     <% } %>
                 </td>
                 
@@ -244,8 +244,7 @@
                       <% } %>
                       <% counter++ %>
                 <%});%>
-                
-                  
+                <% } %>
                 </tbody>
               </table>
             </div>
@@ -278,41 +277,43 @@
 
 <!---------------------------------------- modal_disply_offers ---------------------------------------------->
 <div class="modal fade" id="offerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-   <div class="modal-dialog">
-      <div class="modal-content">
-         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Offer List</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: black;"></button>
-         </div>
-         <div class="modal-body" id="offer-modal_1">
-          
-           <% availableOffers.forEach((offer)=>{%>
-        
-          <div class="card" style="width: 25rem; background-color: cadetblue;">
-            <!-- <img src="/adminAssets/images/offer_sticker.png" class="card-img-top" alt="..."> -->
-            <div class="card-body custom-card-background" style="height: .25rem;">
-              <h5 class="card-title" style="color: white;"><%=offer.offerName%></h5>
-            </div>
-            <ul class="list-group list-group-flush" style="background-color: rgb(238, 10, 97);">
-              <li class="list-group-item" style="color: black;">Starting Date:<%=offer.startingDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).replace(/\//g, '-')%></li>
-              <li class="list-group-item" style="color: black;">Expiry Date:<%=offer.expiryDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).replace(/\//g, '-')%></li>
-              <li class="list-group-item" style="color: black;">Discount:<%=offer.percentage%>%</li>
-            </ul>
-          </div>
-    
-              <div class="d-flex mt-2">
-                <button type="button" onclick="applyOffer('<%= offer._id%>')"  class="btn btn-primary" >Apply</button>
-              </div>
-         <% }); %>
-         <% } %>
-         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-         </div>
-    </div>
-   </div>
+  <div class="modal-dialog">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title" id="exampleModalLabel">Offer List</h5>
+           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: black;"></button>
+        </div>
+        <div class="modal-body" id="offer-modal_1">
+         
+          <% availableOffers.forEach((offer) => { %>
+             <% if (availableOffers) { %>
+               <div class="card" style="width: 25rem; background-color: cadetblue;">
+                 <!-- <img src="/adminAssets/images/offer_sticker.png" class="card-img-top" alt="..."> -->
+                 <div class="card-body custom-card-background" style="height: .25rem;">
+                   <h5 class="card-title" style="color: white;"><%= offer.offerName %></h5>
+                 </div>
+                 <ul class="list-group list-group-flush" style="background-color: rgb(238, 10, 97);">
+                   <li class="list-group-item" style="color: black;">Starting Date:<%= offer.startingDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).replace(/\//g, '-') %></li>
+                   <li class="list-group-item" style="color: black;">Expiry Date:<%= offer.expiryDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).replace(/\//g, '-') %></li>
+                   <li class="list-group-item" style="color: black;">Discount:<%= offer.percentage %>%</li>
+                 </ul>
+               </div>
+   
+               <div class="d-flex mt-2">
+                 <button type="button" onclick="applyOffer('<%= offer._id %>')" class="btn btn-primary">Apply</button>
+               </div>
+             <% } else { %>
+               <h1 class="text-info text">Offer not found</h1>
+             <% } %>
+          <% }); %>
+        </div>
+        <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+     </div>
+  </div>
 </div>
 </div>
-
 
 
 <!-- Bootstrap 5 JS bundle -->

@@ -194,8 +194,30 @@
                     <td style="text-align: center;"><%=data.user.name%></td>
                     <td style="text-align: center;"><%=data.orderDetails.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).replace(/\//g, '-')%></td>
                     <td style="text-align: center;"><%=data.orderDetails.quantity%></td>
-                    <td style="text-align: center;">&#x20B9;<%=data.product.price%></td>
-                    <td style="text-align: center;">&#x20B9;<%=data.product.price*data.orderDetails.quantity%></td>
+
+
+                    <% if(data.product.categoryDiscountedPrice || data.product.discountedPrice){%>
+                      <% if(data.product.categoryDiscountedPrice){%>
+                    <td style="text-align: center;">₹<%=data.product.categoryDiscountedPrice%><del class="text-danger text-sm">₹<%=data.product.price%></del></td>
+                    <% }else{ %>
+                      <td style="text-align: center;">₹<%=data.product.discountedPrice%> <del class="text-danger text-sm">₹<%=data.product.price%></del></td>
+                      <% } %>
+                    <% }else{ %>
+                      <td style="text-align: center;">₹<%=data.product.price%></td>
+                      <% } %>
+
+                      
+                      <% if(data.product.categoryDiscountedPrice || data.product.discountedPrice){%>
+                        <% if(data.product.categoryDiscountedPrice){%>
+                    <td style="text-align: center;">₹<%=data.product.categoryDiscountedPrice * data.orderDetails.quantity%></td>
+                    <% }else{ %>
+                      <td style="text-align: center;">₹<%=data.product.discountedPrice * data.orderDetails.quantity%></td>
+                      <% } %>
+                    <% }else{ %>
+                      <td style="text-align: center;">₹<%=data.product.price * data.orderDetails.quantity%></td>
+                      <% } %>
+
+
                     <td style="text-align: center;"><img src="/adminAssets/images/<%=data.product.image[0]%>" class="avatar avatar-sm me-3 border-radius-lg" alt=""></td>
 
 

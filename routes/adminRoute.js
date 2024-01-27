@@ -124,7 +124,7 @@ admin_route.post('/add-offer', adminAuth.isLogin, offerController.addOffer);
 admin_route.get('/edit-offer',adminAuth.isLogin, offerController.loadEditOffer);
 admin_route.post('/edit-offer',adminAuth.isLogin, offerController.editOffer);
 admin_route.patch('/cancelOffer',adminAuth.isLogin, offerController.cancelOffer);
-admin_route.patch('/applyOffer',adminAuth.isLogin, categoryController.applyOffer);
+admin_route.patch('/applyOffer',adminAuth.isLogin, categoryController.applyCategoryOffer);
 admin_route.patch('/removeOffer', adminAuth.isLogin, categoryController.removeCategoryOffer);
 
 admin_route.patch('/applyProductOffer',adminAuth.isLogin, productController.applyProductOffer);

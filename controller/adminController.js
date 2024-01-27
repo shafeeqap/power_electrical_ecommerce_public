@@ -1,6 +1,7 @@
 const Admin = require('../models/adminModel');
 const User = require('../models/userModel');
 const Order = require('../models/orderModel');
+const Offer = require('../models/offerModel');
 const Product = require('../models/productModel');
 const bcrypt = require('bcrypt');
 const randomstring = require('randomstring');
@@ -500,8 +501,9 @@ const userBlockorActive = async(req,res)=>{
 // ----------------------------------------- Load View Orders Page ----------------------------------------//
 const loadViewOrders = async (req, res) => {
     try {
-        const orderData = await Order.find().sort({date:-1});
+        const orderData = await Order.find().populate('products').sort({date:-1});
         const productsArray = [];
+   
 
         for (let order of orderData) {
             for (let productValue of order.products) {
@@ -530,6 +532,7 @@ const loadViewOrders = async (req, res) => {
             }
         }
 
+    
         
         res.render('view-orders', {
             title: 'View Orders',
@@ -537,7 +540,9 @@ const loadViewOrders = async (req, res) => {
         });
     } catch (error) {
         console.error(error);
-        res.status(500).send('Internal Server Error');
+        res.status(500).render('500', {
+            title: '500',
+        });
     }
 };
 

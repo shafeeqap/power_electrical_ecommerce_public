@@ -47,8 +47,7 @@ const viewCategory = async(req,res)=>{
         }).countDocuments();
 
         const availableOffers = await Offer.find({status:true, expiryDate:{$gte: new Date()}});
-                
-    
+   
     
         res.render('view-category',{
             title:'View Category',
@@ -217,7 +216,7 @@ const categoryListorUnlist = async(req,res)=>{
 };
 
 // ------------------------------------ Apply Category Offer -------------------------------//
-const applyOffer = async (req, res) => {
+const applyCategoryOffer = async (req, res) => {
     try {
         const { offerId, categoryId } = req.body;
 
@@ -340,6 +339,6 @@ module.exports={
     editCategoryLoad,
     updateCategory,
     categoryListorUnlist,
-    applyOffer,
+    applyCategoryOffer,
     removeCategoryOffer
 }
