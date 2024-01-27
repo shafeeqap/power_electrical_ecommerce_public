@@ -24,19 +24,23 @@ const addToCart = async (req, res) => {
                 return res.status(404).json({ error: 'Product not found' });
             }
 
-            console.log('productData', productData);
 
             let productPrice = 0;
 
             if (productData.discountedPrice || productData.categoryDiscountedPrice) {
-                productPrice = productData.discountedPrice < productData.categoryDiscountedPrice
-                    ? productData.discountedPrice
-                    : productData.categoryDiscountedPrice;
-            } else {
-                productPrice = productData.price;
-            }
+                if(productData.discountedPrice ){
+                    productPrice = productData.discountedPrice
+                }else{
+                    productPrice = productData.categoryDiscountedPrice
+                }
+                    
+            } else if(productData.discountedPrice && productData.categoryDiscountedPrice) {
+                        productPrice = Math.max(productData.discountedPrice, productData.categoryDiscountedPrice);
+        }else{
+            productPrice = productData.price;
+    }
 
-            console.log('productPrice', productPrice);
+        
 
             if (userCart) {
                 const productExist = userCart.products.findIndex(product => product.productId == productId);
@@ -102,8 +106,6 @@ const cartLoad = async(req,res)=>{
     
 
         const cartData = await Cart.findOne({userId:user_Id}).populate("products.productId");
-
-        console.log('cartData',cartData);
         
 
         if(req.session.user_id){
@@ -187,16 +189,14 @@ const cartQuantity = async(req, res)=>{
             await Cart.updateOne({userId:userId,"products.productId":productId},
             {$inc:{"products.$.quantity":count}});
 
-
             res.json({changeSuccess:true});
         }
         
         const updateCartData = await Cart.findOne({userId:userId});
-        console.log('updateCartData',updateCartData);
+    
       
         const updatedProduct = updateCartData.products.find((product)=>product.productId.toString()===productId.toString());
 
-        console.log('updatedProduct',updatedProduct);
 
         const updatedQuantity = updatedProduct.quantity;
 
@@ -206,7 +206,6 @@ const cartQuantity = async(req, res)=>{
    
         const productTotal = productPrice*updatedQuantity
        
-        console.log('productTotal',productTotal);
 
         const prodcutTotal = await Cart.updateOne({userId:userId,"products.productId":productId},
         {$set:{"products.$.totalPrice":productTotal}})

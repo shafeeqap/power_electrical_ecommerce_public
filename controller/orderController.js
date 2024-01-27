@@ -497,8 +497,6 @@ const cancelOrder = async(req, res)=>{
                 {$inc:{qty:quantity}},
                 { new: true });
 
-               
-
                 res.redirect('/orders');
         
 

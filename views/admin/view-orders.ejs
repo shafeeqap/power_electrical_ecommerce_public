@@ -198,7 +198,7 @@
 
                     <% if(data.product.categoryDiscountedPrice || data.product.discountedPrice){%>
                       <% if(data.product.categoryDiscountedPrice){%>
-                    <td style="text-align: center;">₹<%=data.product.categoryDiscountedPrice%><del class="text-danger text-sm">₹<%=data.product.price%></del></td>
+                    <td style="text-align: center;">₹<%=data.product.categoryDiscountedPrice%> <del class="text-danger text-sm">₹<%=data.product.price%></del></td>
                     <% }else{ %>
                       <td style="text-align: center;">₹<%=data.product.discountedPrice%> <del class="text-danger text-sm">₹<%=data.product.price%></del></td>
                       <% } %>
