@@ -1,6 +1,136 @@
 <%- include('../layout/header.ejs') %>
 <%- include('../layout/navigation.ejs') %>
 
-<h1>Contact Page</h1>
+<style>
 
+    body{
+        background-color: rgb(250, 250, 250);
+    }
+    h3{
+        color: black;
+    }
+    .contact{
+        color: white;
+    }
+    .required-field::before {
+        content: "*";
+        color: red;
+        margin-right: 5px;
+    }
+
+
+</style>
+
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="breadcrumb-header">Contact</h3>
+                <ul class="breadcrumb-tree">
+                    <li><a href="/home">Home</a></li>
+                    <li class="active">Contact</li>
+                </ul>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+
+
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 sm-6 d-flex justify-content-center mt-5">
+                <div class="card" style="width: 25rem; margin-bottom: 50px;">
+                    <div class="card-header" style="padding: 5%; background-color: #D10024;">
+                       <h3 class="contact" style="margin: 0;"> Contact Us</h1>
+                        <p style="color: white;">Please fill this form in a decent manner</p>
+                    </div>
+                    <div class="card-body">
+                        <form action="" id="contactForm" onsubmit="submitForm(event)">
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="required-field">Full Name</label>
+                                <input type="text" name="name" class="form-control" id="name" placeholder="Enter your name" onfocus="this.placeholder = '' " onblur="this.placeholder = 'Enter your name'">
+                                <div id="nameError" class="error-message text-danger"></div>
+                              </div>
+                              <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="required-field">Email</label>
+                                <input type="email" name="email" class="form-control" id="email" placeholder="Enter your email" onfocus="this.placeholder = '' " onblur="this.placeholder = 'Enter your email'">
+                                <div id="emailError" class="error-message text-danger"></div>
+                              </div>
+                              <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="required-field">Subject</label>
+                                <input type="text" name="subject" class="form-control" id="subject" placeholder="Enter your subject" onfocus="this.placeholder = '' " onblur="this.placeholder = 'Enter your subject'">
+                                <div id="subjectError" class="error-message text-danger"></div>
+                              </div>
+                              <div class="mb-3">
+                                <label for="exampleFormControlTextarea1" class="required-field">Message</label>
+                                <textarea class="form-control" name="message" id="message" rows="3" placeholder="Enter your message" onfocus="this.placeholder = '' " onblur="this.placeholder = 'Enter your message'"></textarea>
+                                <div id="messageError" class="error-message text-danger"></div>
+                              </div>
+                              <div class="mb-3">
+                                <button type="submit" class="btn btn-primary" style="width: 100%;">Submit</button>
+                              </div>
+                        
+                          </form>
+                    </div>
+
+                  </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+    async function submitForm(event){
+        try {
+
+            event.preventDefault();
+
+            const response = await axios.post('/contact', {
+                name:document.getElementById('name').value,
+                email:document.getElementById('email').value,
+                subject:document.getElementById('subject').value,
+                message:document.getElementById('message').value,
+
+            });
+
+            if(response.data.success){
+                 // Show success message and redirect to home
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: 'Thank you for contacting! We will get in touch with you.',
+                }).then(()=>{
+                    window.location.href="/home";
+                })
+            }else{
+                 // Show error message with try again button
+                 Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Sorry, some errors!',
+                    showCancelButton: true,
+                    confirmButtonText: 'Try Again',
+                });
+            }
+   
+        } catch (error) {
+            console.error('API Error:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'An error occurred. Please try again later.',
+            });
+        }
+    }
+</script>
 <%- include('../layout/footer.ejs') %>

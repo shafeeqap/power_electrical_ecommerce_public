@@ -216,6 +216,7 @@
                             <% } else { %> text-primary text-sm<% } %>">
                             <%= active %>
                         </span>
+                        <p class="text-info text-sm"> <%=cat.offer.offerName%><br><span class="text-warning text-sm"><%=cat.offer.percentage%>% Discount</span></p>
                     <% } else { %>
                         <!-- Display 'Cancelled' if offer is not active -->
                         <span class="text-info text-sm">No Offer Appllied</span>

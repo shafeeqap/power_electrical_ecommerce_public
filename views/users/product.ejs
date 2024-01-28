@@ -173,22 +173,29 @@
                                 <% if(product.image.length >0) {%>
                                 <img src="/adminAssets/images/<%=product.image[0]%>" alt="">
                                 <% };%>
+                                <!-- Product Label -->
+                                <div class="product-label">
+                                <% if(product.offer || product.category.offer){%>
+                                    <% if(product.offer && (!product.category.offer || product.offer.percentage > product.category.offer.percentage)){%>
+                                    <span class="sale">-<%=product.offer.percentage%>%</span>
+                                    <span class="new">OFFER</span>
+                                    <% }else if(product.category.offer){%>
+                                    <span class="sale">-<%=product.category.offer.percentage%>%</span>
+                                    <span class="new">OFFER</span>
+                                    <% }else{ %>
+                                        <span class="sale">-<%=product.offer.percentage%>%</span>
+                                        <span class="new">NEW</span>
+                                        <% } %>
+                                        <% } %>
+                                    </div>
+                                     <!-- Product Label End-->
 
-                                <!-- <div class="product-label">
-                                <% if (product.offer || product.category.offer) { %>
-                                    <% if (product.offer && (!product.category.offer || product.offer.percentage > product.category.offer.percentage)) { %>
-                                    <span class="sale">-<%= product.offer.percentage %>%</span><span class="new">NEW</span>
-                                    <% } else if(product.category.offer){%>
-                                        <span class="sale">-<%= product.category.offer.percentage %>%</span><span class="new">NEW</span>
-                                </div>
-                                    <% } %>
-                                <% } %> -->
                             </div></a>
                             <div class="product-body">
                                 <p class="product-category"><%=product.category.categoryName%></p>
                                 <p class="product-brand warning"><%=product.brandName.brandName%></p>
                                 <h3 class="product-name"><a href="#"><%=product.name%></a></h3>
-                                <% if(product.offer && (!product.category.offer || product.offer.percentage > product.category.percentage)){%>
+                                <% if(product.offer && (!product.category.offer || product.offer.percentage > product.category.offer.percentage)){%>
                                 <h4 class="product-price">₹ <%=product.discountedPrice%>
                                     <del class="product-old-price">₹ <%=product.price%></del></h4>
                                     <% }else if(product.category.offer){ %>

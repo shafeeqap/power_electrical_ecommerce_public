@@ -124,47 +124,44 @@ const loadDashboard = async (req, res) => {
         //------------------------------------------- weeklySalesData ---------------------------------------//
         const pipeline = ([
             {
-              $match: {
-                "products.orderStatus": "Delivered"
-              }
-            },
-            {
-              $group: {
-                _id: {
-                  $week: "$date"
-                },
-                totalAmount: {
-                  $sum: "$totalAmount"
+                $match: {
+                    "products.orderStatus": "Delivered"
                 }
-              }
             },
             {
-              $sort: {
-                _id: 1
-              }
+                $group: {
+                    _id: {
+                        $isoWeek: "$date"
+                    },
+                    totalAmount: {
+                        $sum: "$totalAmount"
+                    }
+                }
+            },
+            {
+                $sort: {
+                    _id: 1
+                }
             }
-          ]);
-      
-      
+        ]);
         
         const weeklySalesData = await Order.aggregate(pipeline);
         
         
-       
-    
-        const labels = ["Week 1", "Week 2", "Week 3", "Week 4"];
-        const salesData = Array(4).fill(0);
-        // const salesData = weeklySalesData.map(item => item.totalAmount)
+        const maxWeek = Math.max(...weeklySalesData.map(item => item._id), 0);
+        const labels = Array.from({ length: maxWeek }, (_, i) => `Week ${i + 1}`);
+        const salesData = Array(maxWeek).fill(0);
         let weeklyTotal = 0;
-       
+        
         weeklySalesData.forEach(item => {
-            const weekIndex = item._id; // Adjusted index
-            if (weekIndex >= 0 && weekIndex < 4) {
-              salesData[weekIndex] = item.totalAmount;
-              weeklyTotal += item.totalAmount;
+            const weekIndex = item._id - 1; // Adjusted index
+            if (weekIndex >= 0 && weekIndex < maxWeek) {
+                salesData[weekIndex] = item.totalAmount;
+                weeklyTotal += item.totalAmount;
             }
-          });
-
+        });
+        
+        
 
         //------------------------------------------- monthlySalesData ---------------------------------------//
         const monthly =[
@@ -301,7 +298,6 @@ const loadDashboard = async (req, res) => {
 
         const paymentMethod = paymentChart.map(item =>item._id);
         const paymentValue = paymentChart.map(item =>item.totalAmount);
-
 
 
         res.render('adminHome', {

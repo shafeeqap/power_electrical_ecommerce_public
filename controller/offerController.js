@@ -4,10 +4,8 @@ const Offer = require('../models/offerModel');
 //------------------------------------------- Load View Offer Page ------------------------------------------//
 const loadViewOffer = async (req, res) => {
     try {
-       
-
         
-        const offerData = await Offer.find();
+        const offerData = await Offer.find().sort({ date: -1 });
 
         res.render('view-offers', {
             title: 'View Offers',
@@ -15,14 +13,13 @@ const loadViewOffer = async (req, res) => {
             now: new Date()
         });
 
-
         return;
-        
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
     }
 };
+
 
 
 // --------------------------------------- Load Add Offer Page ---------------------------------------------//

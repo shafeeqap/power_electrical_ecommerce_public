@@ -426,8 +426,9 @@ const productLoad = async(req,res)=>{
         const limit=6;
 
         const user =  await User.findById(req.session.user_id);
-        const categoryData = await Category.find({is_block:false});
+        const categoryData = await Category.find({is_block:false}).populate('offer')
         const brandData = await Brand.find({is_block:false});
+
 
         const productData = await Product.find({
             is_active:true,
@@ -439,8 +440,9 @@ const productLoad = async(req,res)=>{
         })
         .limit(limit*1)
         .skip((page-1)*limit)
-        .populate('category')
+        .populate({path:"category", populate:{path:"offer"}})
         .populate('brandName')
+        .populate('offer')
         .exec();
 
         // Count of pages
@@ -454,6 +456,7 @@ const productLoad = async(req,res)=>{
         }).countDocuments()
 
     
+
         res.render('product', {
             user,
             productData,

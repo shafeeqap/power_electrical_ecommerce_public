@@ -442,7 +442,7 @@ const orderDetails = async(req, res)=>{
         const userData = await User.findOne({_id:userId})
         const orderData = await Order.findOne({_id:id}).populate('products.productId')
         
-        console.log('orderData',orderData);
+    
         
         res.render('orderDetails',{
             user:userData,

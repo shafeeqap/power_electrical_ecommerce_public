@@ -126,9 +126,9 @@ h3, h4, h5, h6 {
                                         </td>
                                         <% if(data.productId.offer || data.productId.categoryOffer) {%>
                                             <% if(data.productId.offer){%>
-                                                <td><del>₹ <%=data.productId.price%></del> ₹ <%=data.productId.discountedPrice%></td>
+                                                <td><del class="text-danger text-sm">₹ <%=data.productId.price%></del> ₹ <%=data.productId.discountedPrice%></td>
                                                 <% }else{%>
-                                                <td><del> ₹ <%=data.productId.price %></del> ₹ <%= data.productId.categoryDiscountedPrice %></td>
+                                                <td><del class="text-danger text-sm"> ₹ <%=data.productId.price %></del> ₹ <%= data.productId.categoryDiscountedPrice %></td>
                                                 <% } %>
                                                 <% }else{%>
                                                     <td> ₹ <%=data.productId.price %></td>

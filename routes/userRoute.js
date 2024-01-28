@@ -111,7 +111,7 @@ user_router.post('/verifyWalletpayment',userAuth.isLogin, userController.verifyW
 user_router.get('/walletHistory', userAuth.isLogin, userAuth.is_blocked, userController.walletHistory)
 
 user_router.get('/contact',userAuth.isLogin, userAuth.is_blocked, contactController.contactLoad);
-
+user_router.post('/contact',userAuth.isLogin, userAuth.is_blocked, contactController.newContact);
 
 
 

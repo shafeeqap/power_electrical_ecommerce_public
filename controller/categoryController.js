@@ -35,7 +35,7 @@ const viewCategory = async(req,res)=>{
         .populate('offer')
         .exec();
 
-    
+
 
         // count
         const count = await Category.find({ 

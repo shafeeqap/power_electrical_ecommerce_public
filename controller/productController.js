@@ -19,6 +19,8 @@ const viewProduct = async (req, res) => {
         .populate('brandName')
         .populate('offer')
 
+        console.log('product',product);
+        
         const availableOffers = await Offer.find({status:true, expiryDate:{$gte: new Date()}});
         
         res.render('view-product', {
