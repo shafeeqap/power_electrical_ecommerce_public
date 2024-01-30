@@ -15,11 +15,11 @@ const viewProduct = async (req, res) => {
     try {
 
         const product = await Product.find()
-        .populate('category')
+        .populate({path:"category", populate:{path:"offer"}})
         .populate('brandName')
         .populate('offer')
 
-        console.log('product',product);
+    
         
         const availableOffers = await Offer.find({status:true, expiryDate:{$gte: new Date()}});
         

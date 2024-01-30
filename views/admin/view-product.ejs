@@ -262,8 +262,8 @@
                         <span class="text-info text-sm"><%=products.offer.offerName %></span>
                       <p class="text-xs text-success font-weight-bold mb-0"><%=products.offer.percentage%>% Discount</p>
                       <%}else if(products.category && products.category.offer){%>
-                        <span class="text-danger">Category Offer Applied !</span>
-                        <%=products.category.offer.offerName %>
+                        <span class="text-warning text-sm">Category Offer Applied !</span><br>
+                        <span class="text-info text-sm"><%=products.category.offer.offerName %></span>
                         <p class="text-xs text-success font-weight-bold mb-0"><%=products.category.offer.percentage%>% Discount</p>
                         <% }else{%>
                           <span class="text-danger text-sm">No offer</span>

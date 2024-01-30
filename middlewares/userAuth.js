@@ -21,7 +21,7 @@ const isLogin = async(req,res,next)=>{
 // Check user is blocked/not
 const is_blocked = async(req, res, next)=>{
     try {
-
+        
         const userData = await User.findById(req.session.user_id);
         // console.log('user data', userData);
         

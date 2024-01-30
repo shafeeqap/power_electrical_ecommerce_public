@@ -305,7 +305,7 @@
                    <input type="hidden" class="form-control" id="recipient-name" value="<%=orders.totalAmount%>" name="totalPrice">
                 </div>
 
-                <% if(orders.paymentMethod != "COD" && orders.products.OrderStatus != "pending"){ %>
+                <% if(orders.products.OrderStatus != "pending"){ %>
           
                   <div class="mb-3 ">
                     <label for="recipient-name" class="col-form-label">Choose Refund Option:</label>

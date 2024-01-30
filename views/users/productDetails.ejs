@@ -88,7 +88,7 @@
                         <span class="product-available">Stock out</span>
                         <%}%>
                     </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <p><%=product.description%></p>
 
                     <!-- <div class="product-options">
                         <label>
@@ -114,7 +114,7 @@
                                 <span class="qty-down">-</span>
                             </div>
                         </div>
-                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                        <button onclick="addToCart('<%=product._id%>')" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
                     </div>
 
                     <ul class="product-btns">
@@ -362,72 +362,7 @@
 <!-- /SECTION -->
 
 
-<script>
 
-
-        // Function cart count
-    function cartCount(productId, userId, count){
-
-        // console.log('cartCount function called');
-        
-        const quantityElement = document.getElementById(productId);
-        const quantity = parseInt(quantityElement.innerHTML);
-        // const count = parseInt(count);
-
-        if(count === -1 && quantity === 1){
-            return;
-        }
-
-        $.ajax({
-            url:'/productDetails/cart-quantity',
-            method:'post',
-            // encoded:true,
-            data:{
-                product:productId,
-                userId:userId,
-                count:count,
-                // quantity:quantity
-            }
-        }).done(data=>{
-            console.log('Quantity data',data);
-
-            if(data.changeSuccess){
-                const newQuantity = quantity + count;
-                quantityElement.innerHTML = newQuantity;
-
-
-                // Enable the minus button if the quantity is grater than 0
-                const minusButton = quantityElement.previousElementSibling;
-                
-                minusButton.style.pointerEvents = newQuantity <= 0 ? 'none' : 'auto';
-                minusButton.style.opacity = newQuantity <= 0 ? 0.5 : 1;
-           
-        
-
-        $('#reloadDiv').load('/cart #reloadDiv');
-    } else if (data.check) {
-        // This block will execute if the product is out of stock
-        swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Out of stock",
-          });
-    } else {
-        swal.fire({
-            position: "center",
-            icon: "warning",
-            text: data.message,
-            timer: 1500,
-            showConfirmButton: false,
-        });
-    }
-});
-
-}
-  
-
-  
-</script>
 
 <!-- Initialize Elevate Zoom -->
 
@@ -466,6 +401,36 @@
          
         </script>
     
+    <script>
+         // Add to Cart function
+    function addToCart(id){
+        console.log('Add to cart function called'+id);
+        $.ajax({
+            url:"/addToCart",
+            method:"post",
+            encoded:true,
+            data:{id:id},
+        }).done((data)=>{
+            if(data){
+                console.log(data);
+
+                Swal.fire({
+                    icon:'success',
+                    title:'Item has been added to cart',
+                    showConfirmButton:false,
+                    timer:1000
+                })
+            }else{
+                Swal({
+                    icon:'warning',
+                    title:'Fail to add',
+                    showConfirmButton:false,
+                    timer:1000
+                });
+            }
+        });
+    }
+    </script>
 
 
 <%-include('../layout/footer.ejs')%>

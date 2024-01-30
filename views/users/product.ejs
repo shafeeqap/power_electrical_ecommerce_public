@@ -169,7 +169,7 @@
                     <% productData.forEach(product=> {%>
                     <div class="col-md-4 col-xs-6 product-item" data-brand="<%= product.brandName.brandName %>" >
                         <div class="product">
-                            <a href="#/productDetails?id=<%=product._id%>"><div class="product-img">
+                            <a href="/productDetails?id=<%=product._id%>"><div class="product-img">
                                 <% if(product.image.length >0) {%>
                                 <img src="/adminAssets/images/<%=product.image[0]%>" alt="">
                                 <% };%>
@@ -344,34 +344,39 @@
         }
     });
 
-    // Add to Cart function
-    function addToCart(id){
-        console.log('Add to cart function called'+id);
-        $.ajax({
-            url:"/addToCart",
-            method:"post",
-            encoded:true,
-            data:{id:id},
-        }).done((data)=>{
-            if(data){
-                console.log(data);
+// Add to Cart function
 
-                Swal.fire({
-                    icon:'success',
-                    title:'Item has been added to cart',
-                    showConfirmButton:false,
-                    timer:1000
-                })
-            }else{
-                Swal({
-                    icon:'warning',
-                    title:'Fail to add',
-                    showConfirmButton:false,
-                    timer:1000
-                });
-            }
-        });
+function addToCart(id) {
+  console.log("addToCart function called with id: " + id);
+  $.ajax({
+    url: "/addTocart",
+    method: "post",
+    encoded: true,
+    data: {id: id},
+  }).done((data) => {
+    if (data.success) {
+      console.log(data);
+
+      Swal.fire({
+            icon: 'success',
+            title: 'Item has been added to Cart!',
+            showConfirmButton: false,
+            timer: 1000
+    })
+    } else {
+        console.log(data);
+        Swal.fire({
+            icon: 'warning',
+            title: 'Insufficient stock !',
+            showConfirmButton: false,
+            timer: 1000
+    })
     }
+  });
+}
+
+
+
 </script>
 
 

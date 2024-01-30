@@ -8,7 +8,7 @@ const Razorpay = require('razorpay');
 const crypto = require('crypto');
 const { ObjectId } = require('mongodb');
 const { log } = require('console');
-
+const mongoose = require('mongoose');
 
 
 // Create Razorpay instance
@@ -28,7 +28,6 @@ const loadCheckOut = async(req,res)=>{
 
         const cartData = await Cart.findOne({userId:userId}).populate("products.productId").exec();
        
-        console.log('cartData',cartData);
 
         const couponData = await Coupon.find({status:true});
 
@@ -81,6 +80,8 @@ const loadCheckOut = async(req,res)=>{
         console.log(error);
     }
 };
+
+
 
 //---------------------------------------------- Place Order -----------------------------------------//
 const placeOrder = async(req, res)=>{
