@@ -99,7 +99,7 @@ const AddBanner = async(req, res)=>{
         
     } catch (error) {
         console.log(error);
-        res.status(500).send('Internal Server Error');
+        res.status(500).render('500');
     }
 };
 
@@ -117,7 +117,7 @@ const loadEditBanner = async(req, res)=>{
         
     } catch (error) {
         console.log(error);
-        res.status(500).send('Internal Server Error');
+        res.status(500).render('500');
     }
 };
 
@@ -162,7 +162,7 @@ const EditBanner = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
-        res.status(500).send('Internal Server Error');
+        res.status(500).render('500');
     }
 };
 
@@ -189,7 +189,7 @@ const bannerStatus = async(req, res)=>{
         
     } catch (error) {
         console.log(error);
-        res.status(500).send('Internal Server Error');
+        res.status(500).render('500');
     }
 }
 

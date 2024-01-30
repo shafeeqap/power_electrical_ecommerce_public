@@ -13,7 +13,7 @@ const contactLoad = async(req, res)=>{
         
     } catch (error) {
         console.log(error);
-        res.render('error', { message: 'An error occurred', status: 500 });
+        res.render('500')
     }
 };
 
@@ -44,7 +44,7 @@ const newContact = async(req, res)=>{
 
     } catch (error) {
         console.log(error);
-        res.render('error', { message: 'An error occurred', status: 500 });
+        res.render('500')
     }
 }
 

@@ -167,22 +167,36 @@
 										<div class="product">
 											<div class="product-img">
 												<img src="/adminAssets/images/<%=product.image[0]%>" alt="" style="width: 300px;">
-												<div class="product-label">
-													<span class="sale">-30%</span>
-													<span class="new">NEW</span>
-												</div>
+<!-- Product Label -->
+<div class="product-label">
+	<% if(product.offer || product.category.offer){%>
+		<% if(product.offer && (!product.category.offer || product.offer.percentage > product.category.offer.percentage)){%>
+		<span class="sale">-<%=product.offer.percentage%>%</span>
+		<span class="new">OFFER</span>
+		<% }else if(product.category.offer){%>
+		<span class="sale">-<%=product.category.offer.percentage%>%</span>
+		<span class="new">OFFER</span>
+		<% }else{ %>
+			<span class="sale">-<%=product.offer.percentage%>%</span>
+			<span class="new">NEW</span>
+			<% } %>
+			<% } %>
+		</div>
+		 <!-- Product Label End-->
 											</div>
 											<div class="product-body">
 												<p class="product-category"><%=product.category.categoryName%></p>
 												<p class="product-category"><%=product.brandName.brandName%></p>
 												<h3 class="product-name"><a href="#"><%=product.name%></a></h3>
-												<% if(product.offer && (!product.category.offer || product.offer.percentage > product.category.percentage)){%>
-												<h4 class="product-price">₹ <%=product.discountedPrice%> <del class="product-old-price">₹ <%=product.price%></del></h4>
-												<% }else if(product.category.offer){ %>
-													<h4 class="product-price">₹ <%=product.categoryDiscountedPrice%></h4>
-													<% }else{ %>
-														<h4 class="product-price">₹ <%=product.price%></h4>
-														<% }%>
+												<% if(product.offer && (!product.category.offer || product.offer.percentage > product.category.offer.percentage)){%>
+													<h4 class="product-price">₹ <%=product.discountedPrice%>
+														<del class="product-old-price">₹ <%=product.price%></del></h4>
+														<% }else if(product.category.offer){ %>
+															<h4 class="product-price">₹ <%=product.categoryDiscountedPrice%>
+																<del class="product-old-price">₹ <%=product.price%></del></h4>
+															<% }else{ %>
+																<h4 class="product-price">₹ <%=product.price%></h4>
+																<% }%>
 												<div class="product-rating">
 													<i class="fa fa-star"></i>
 													<i class="fa fa-star"></i>
@@ -197,8 +211,8 @@
 												</div>
 											</div>
 											<div class="add-to-cart">
-												<!-- <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button> -->
-												<a href="/product"><button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>SHOP NOW</button></a>
+												<button onclick="addToCart('<%=product._id%>')" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+												<!-- <a href="/product"><button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>SHOP NOW</button></a> -->
 											</div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
 										</div>
 										<!-- /product -->
@@ -783,6 +797,39 @@
 		</div>
 		<!-- /NEWSLETTER -->
 
+		<!-- CDN link for sweetalert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+	// Add to Cart function
+function addToCart(id){
+   console.log('Add to cart function called'+id);
+   $.ajax({
+	   url:"/addToCart",
+	   method:"post",
+	   encoded:true,
+	   data:{id:id},
+   }).done((data)=>{
+	   if(data){
+		   console.log(data);
+
+		   Swal.fire({
+			   icon:'success',
+			   title:'Item has been added to cart',
+			   showConfirmButton:false,
+			   timer:1000
+		   })
+	   }else{
+		   Swal({
+			   icon:'warning',
+			   title:'Fail to add',
+			   showConfirmButton:false,
+			   timer:1000
+		   });
+	   }
+   });
+}
+</script>
 
 
     <%-include('../layout/footer.ejs') %>

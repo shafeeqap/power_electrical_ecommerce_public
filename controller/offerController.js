@@ -16,7 +16,7 @@ const loadViewOffer = async (req, res) => {
         return;
     } catch (error) {
         console.error(error);
-        res.status(500).send('Internal Server Error');
+        res.render('500')
     }
 };
 
@@ -30,7 +30,7 @@ const loadAddOffer = async(req, res)=>{
         
     } catch (error) {
         console.log(error);
-        res.status(500).send('Internal Server Error');
+        res.render('500')
     }
 };
 
@@ -66,7 +66,7 @@ const addOffer = async(req, res)=>{
         
     } catch (error) {
         console.log(error);
-        res.status(500).send('Internal Server Error');
+        res.render('500')
     }
 };
 
@@ -88,7 +88,7 @@ const loadEditOffer = async(req, res)=>{
         
     } catch (error) {
         console.log();
-        res.status(500).send('Internal Server Error');
+        res.render('500')
     }
 };
 
@@ -114,7 +114,7 @@ const editOffer = async(req, res)=>{
         
     } catch (error) {
         console.log(error);
-        res.status(500).send('Internal Server Error');
+        res.render('500')
     }
 };
 
@@ -133,7 +133,7 @@ const cancelOffer = async(req, res)=>{
         
     } catch (error) {
         console.log(error);
-        res.status(500).send('Internal Server Error');
+        res.render('500')
     }
 }
 

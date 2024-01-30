@@ -31,7 +31,7 @@ const viewProduct = async (req, res) => {
 
     } catch (error) {
         console.log(error);
-        res.status(500).send('Server error');
+        res.render('500')
     }
 };
 
@@ -49,7 +49,7 @@ const loadAddProduct = async(req,res)=>{
 
     } catch (error) {
         console.log(error);
-        res.status(500).send('Internal Server Error');
+        res.render('500')
     }
 }
 
@@ -104,7 +104,7 @@ const addProduct = async(req,res)=>{
         
     } catch (error) {
         console.log(error);
-        res.status(500).send('Server error');
+        res.render('500')
     }
 }
 
@@ -131,6 +131,7 @@ const editProductLoad = async(req,res)=>{
 
     } catch (error) {
         console.log(error);
+        res.render('500')
     }
 }
 
@@ -199,8 +200,8 @@ const editProduct = async(req,res)=>{
             }
         
         }catch (error) {
-            console.error('Error in editProduct:', error);
-            res.status(500).send('Internal Server Error');
+            console.log(error);
+            res.render('500')
     }
 };
 
@@ -243,7 +244,7 @@ const productListorUnlist = async(req,res)=>{
 
     } catch (error) {
         console.log(error);
-        res.status(500).json({ success: false, message: 'Internal Server Error' });
+        res.render('500')
     }
 };
 
@@ -286,7 +287,7 @@ const removeImage = async (req, res) => {
   
     } catch (error) {
       console.error(error);
-      return res.status(500).json({ error: 'Internal server error.' });
+      res.render('500')
     }
   };
   
@@ -335,7 +336,7 @@ const removeImage = async (req, res) => {
 
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ error: 'Internal server error.' });
+        res.render('500')
     }
   }
 
@@ -358,7 +359,7 @@ const removeImage = async (req, res) => {
         
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ error: 'Internal server error.' });
+        res.render('500')
     }
   }
 

@@ -78,6 +78,7 @@ const loadCheckOut = async(req,res)=>{
         
     } catch (error) {
         console.log(error);
+        res.render('500')
     }
 };
 
@@ -261,7 +262,7 @@ const placeOrder = async(req, res)=>{
 
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.render('500')
     }
 
 };
@@ -346,7 +347,7 @@ const verifyPayment = async (req, res) => {
       }
     } catch (error) {
       console.log(error);
-      res.status(500).json({ error: 'Internal Server Error' });
+      res.render('500')
     }
   };
   
@@ -361,6 +362,7 @@ const orderPlacedPageLoad = async(req, res)=>{
         
     } catch (error) {
         console.log(error);
+        res.render('500')
     }
 };
 
@@ -428,7 +430,7 @@ const loadOrderPage = async (req, res) => {
         });
     } catch (error) {
         console.log(error);
-        res.status(500).render('error', { error: 'Internal Server Error' });
+        res.render('500')
     }
 };
 
@@ -452,7 +454,7 @@ const orderDetails = async(req, res)=>{
         
     } catch (error) {
         console.log(error);
-        res.status(500).render('error', { error: 'Internal Server Error' });
+        res.render('500')
     }
 };
 
@@ -548,7 +550,7 @@ const cancelOrder = async(req, res)=>{
         
     } catch (error) {
         console.log(error);
-        res.status(500).send('Internal Server Error');
+        res.render('500')
     }
 };
 
@@ -636,6 +638,7 @@ const returnOrder = async(req, res)=>{
         
     } catch (error) {
         console.log(error);
+        res.render('500')
     }
 };
 
@@ -657,6 +660,7 @@ const loadCheckoutEditAddress = async(req, res)=>{
         
     } catch (error) {
         console.log(error);
+        res.render('500')
     }
 };
 
@@ -683,6 +687,7 @@ const editCheckoutAddress = async(req, res)=>{
         
     } catch (error) {
         console.log(error);
+        res.render('500')
     }
 };
 
@@ -702,6 +707,7 @@ const deleteCheckoutaddress = async(req, res)=>{
         
     } catch (error) {
         console.log(error);
+        res.render('500')
     }
 };
 
@@ -742,7 +748,7 @@ const addCheckoutAddress = async(req, res)=>{
         
     } catch (error) {
         console.log(error);
-        res.status(500).send('Internal Server Error');
+        res.render('500')
     }
 };
 
@@ -774,6 +780,7 @@ const loadOrderStatus = async(req, res)=>{
 
     } catch (error) {
         console.log(error);
+        res.render('500')
     }
 }
 

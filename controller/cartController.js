@@ -82,7 +82,7 @@ const addToCart = async (req, res) => {
         }
     } catch (error) {
         console.error(error);
-        res.status(500).json({ success: false, error: 'Internal Server Error' });
+        res.status(500).render('500');
     }
 };
 
@@ -159,7 +159,7 @@ const cartLoad = async(req,res)=>{
         
     } catch (error) {
         console.log(error);
-        res.render('500').send('Internal Server Error');
+        res.status(500).render('500');
     }
 }
 

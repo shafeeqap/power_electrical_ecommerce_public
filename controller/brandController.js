@@ -49,7 +49,7 @@ const viewBrand = async(req,res)=>{
         
     } catch (error) {
         console.log(error);
-        // res.status(500).send('Internal Server Error');
+        res.status(500).render('500');
     }
 };
 
@@ -60,6 +60,7 @@ const addBrandLoad = async(req,res)=>{
         
     } catch (error) {
         console.log(error);
+        res.status(500).render('500');
     }
 };
 
@@ -83,6 +84,7 @@ const addBrand = async(req,res)=>{
         
     } catch (error) {
         console.log(error);
+        res.status(500).render('500');
     }
 };
 
@@ -104,6 +106,7 @@ const editBrandLoad = async(req,res)=>{
 
     } catch (error) {
         console.log(error);
+        res.status(500).render('500');
     }
 };
 
@@ -130,6 +133,7 @@ const editBrand = async(req,res)=>{
         
     } catch (error) {
         console.log(error);
+        res.status(500).render('500');
     }
 };
 
@@ -151,6 +155,7 @@ const brandListorUnlist = async(req,res)=>{
         
     } catch (error) {
         console.log(error);
+        res.status(500).render('500');
     }
 }
 

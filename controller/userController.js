@@ -372,7 +372,10 @@ const loadHome = async(req,res)=>{
     try {
 
         const categoryData = await Category.find({is_block:false}).populate('offer')
-        const productData = await Product.find({is_active:true}).populate('offer').populate('category').populate('brandName')
+        const productData = await Product.find({is_active:true})
+        .populate('offer')
+        .populate({path:"category", populate:{path:"offer"}})
+        .populate('brandName')
         const user = await User.findById(req.session.user_id);
         const userData = await User.find({is_block:false});
         const banner = await Banner.find({status:true});
@@ -470,7 +473,7 @@ const productLoad = async(req,res)=>{
 
     } catch (error) {
         console.log(error);
-        res.status(500).send('Internal Server Error');
+        res.render('500')
     }
 };
 
@@ -485,7 +488,7 @@ const loadProductDetails = async(req, res)=>{
         const userData = await User.findById(req.session.user_id);
         const productData = await Product.findById({_id:productId});
     
-        console.log('productData',productData);
+        
         
         if(productData){
 
@@ -500,7 +503,7 @@ const loadProductDetails = async(req, res)=>{
         
     } catch (error) {
         console.log(error);
-        res.status(500).send('Internal Server Error');
+        res.render('500')
     }
 }
 
@@ -512,6 +515,7 @@ const userLogout = async(req,res)=>{
         res.redirect('/');
     } catch (error) {
         console.log(error);
+        res.render('500')
     }
 }
 
@@ -527,7 +531,7 @@ const forgetPassword = async(req,res)=>{
         });
     } catch (error) {
         console.log(error);
-        res.render('error', { message: 'An error occurred', status: 500 });
+        res.render('500')
     }
 }
 
@@ -568,7 +572,7 @@ const forgetVerify = async(req,res)=>{
         
     } catch (error) {
         console.log(error);
-        res.render('error', { message: 'An error occurred', status: 500 });
+        res.render('500')
     }
 }
 
@@ -600,7 +604,7 @@ const resetPasswordLoad = async(req,res)=>{
         
     } catch (error) {
         console.log(error);
-        res.status(500).send('Internal Server Error');
+        res.render('500')
     }
 }
 
@@ -621,7 +625,7 @@ const resetPassword = async(req,res)=>{
 
     } catch (error) {
         console.log(error);
-        res.status(500).send('Internal Server Error');
+        res.render('500')
     }
 }
 
@@ -657,6 +661,7 @@ const loadProfile = async(req, res)=>{
         
     } catch (error) {
         console.log(error);
+        res.render('500')
     }
 };
 
@@ -672,7 +677,7 @@ const loadAddress = async(req, res)=>{
         
     } catch (error) {
         console.log(error);
-        res.render(500)        
+        res.render('500')     
     }
 }
 
@@ -688,6 +693,7 @@ const loadAddAddress = async(req,res)=>{
         
     } catch (error) {
         console.log(error);
+        res.render('500')
     }
 }
 
@@ -729,7 +735,7 @@ const addAddress = async(req, res)=>{
         
     } catch (error) {
         console.log(error);
-        res.status(500);
+        res.render('500')
     }
 };
 
@@ -750,6 +756,7 @@ const loadEditAddress = async(req, res)=>{
         
     } catch (error) {
         console.log(error);
+        res.render('500')
     }
 };
 
@@ -776,7 +783,7 @@ const updateUserAddress = async(req, res)=>{
         
     } catch (error) {
         console.log(error);
-        res.status(500).send('Internal Server Error');
+        res.render('500')
     }
 };
 
@@ -791,7 +798,7 @@ const loadChangePassword = async(req, res)=>{
         
     } catch (error) {
         console.log(error);
-        res.status(500).send('Internal Server Error');
+        res.render('500')
     }
 };
 
@@ -846,10 +853,7 @@ const changePasswordVerify = async(req,res)=>{
         
     } catch (error) {
         console.log(error);
-        res.render('error', { 
-            message: 'New password and confirm password do not match.', 
-            status: 500 
-        });
+        res.render('500')
     }
 };
 
@@ -869,6 +873,7 @@ const getWallet = async(req, res )=>{
         
     } catch (error) {
         console.log(error);
+        res.render('500')
     }
 };
 
@@ -896,6 +901,7 @@ const addMoneyToWallet = async(req, res)=>{
 
     } catch (error) {
         console.log(error);
+        res.render('500')
     }
 };
 

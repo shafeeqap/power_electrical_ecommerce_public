@@ -59,7 +59,7 @@ const viewCategory = async(req,res)=>{
     
     } catch (error) {
         console.log(error);
-        res.status(500).send('Server error');
+        res.render('500')
     }
 }
 
@@ -71,6 +71,7 @@ const addCategoryLoad = async(req,res)=>{
 
     } catch (error) {
         console.log(error);
+        res.render('500')
     }
 };
 
@@ -113,7 +114,7 @@ const addCategory = async (req, res) => {
 
     } catch (error) {
         console.log(error);
-        res.status(500).send('Server error');
+        res.render('500')
     }
 };
 
@@ -138,6 +139,7 @@ const editCategoryLoad = async(req,res)=>{
 
     } catch (error) {
         console.log(error);
+        res.render('500')
     }
 }
 
@@ -186,7 +188,7 @@ const updateCategory = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
-        res.status(500).send('Server error');
+        res.status(500).render('500');
     }
 };
 
@@ -212,6 +214,7 @@ const categoryListorUnlist = async(req,res)=>{
 
     } catch (error) {
         console.log(error);
+        res.status(500).render('500');
     }
 };
 
@@ -273,7 +276,7 @@ const applyCategoryOffer = async (req, res) => {
 
     } catch (error) {
         console.log(error);
-        res.status(500).json({ status: false, message: 'Internal Server Error' });
+        res.status(500).render('500');
     }
 };
 
@@ -325,7 +328,7 @@ const removeCategoryOffer = async (req, res) => {
 
     } catch (error) {
         console.log(error);
-        res.status(500).json({ status: false, message: 'Internal Server Error' });
+        res.status(500).render('500');
     }
 }
 

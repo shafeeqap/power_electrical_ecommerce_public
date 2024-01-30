@@ -50,7 +50,7 @@ user_router.get('/user-otp',userController.loadOtp);
 user_router.post('/user-otp',userController.insertUser);
 user_router.get('/resend-otp',userController.resendOtp);
 
-user_router.get('/', userAuth.isLogout, userController.loginLoad)
+user_router.get('/', userAuth.isLogout, userController.loginLoad);
 user_router.get('/login', userAuth.isLogout,userController.loginLoad);
 user_router.post('/login', userAuth.isLogout,userController.verifyLogin);
 user_router.get('/logout',userAuth.isLogin,userController.userLogout);

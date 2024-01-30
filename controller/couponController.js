@@ -18,6 +18,7 @@ const loadViewCoupon = async(req, res)=>{
         
     } catch (error) {
         console.log(error);
+        res.render('500')
     }
 };
 
@@ -30,6 +31,7 @@ const loadAddCoupon = async(req, res)=>{
         
     } catch (error) {
         console.log(error);
+        res.render('500')
     }
 };
 
@@ -86,7 +88,7 @@ if (existingCouponCode) {
         
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.render('500')
     }
 
 };
@@ -106,6 +108,7 @@ const loadEditCoupon = async(req, res)=>{
         
     } catch (error) {
         console.log(error);
+        res.render('500')
     }
 };
 
@@ -143,6 +146,7 @@ const editCoupon = async(req, res)=>{
         
     } catch (error) {
         console.log(error);
+        res.render('500')
     }
 };
 
@@ -160,6 +164,7 @@ const deletecoupon = async(req, res)=>{
 
     } catch (error) {
         console.log(error);
+        res.render('500')
     }
 };
 
@@ -178,6 +183,7 @@ const couponUserPageLoad = async(req, res)=>{
         
     } catch (error) {
         console.log(error);
+        res.render('500')
     }
 }
 
@@ -250,7 +256,7 @@ const applyCoupon = async(req, res)=>{
 
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: true });
+        res.render('500')
     }
 }
 
@@ -280,6 +286,7 @@ const deleteAppliedCoupon = async(req, res)=>{
         
     } catch (error) {
         console.log(error);
+        res.render('500')
     }
 };
 

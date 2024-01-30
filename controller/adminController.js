@@ -60,6 +60,7 @@ const sendResetPasswordMail= async(name,email,token)=>{
         
     } catch (error) {
         console.log(error.message);
+        res.status(500).render('500');
     }
 }
 
@@ -69,6 +70,7 @@ const loadLogin = async(req,res)=>{
         res.render('adminLogin')
     } catch (error) {
         console.log(error);
+        res.status(500).render('500');
     }
 }
 
@@ -96,6 +98,7 @@ const verifyLogin = async(req,res)=>{
         }
     } catch (error) {
         console.log(error);
+        res.status(500).render('500');
     }
 }
 
@@ -330,7 +333,7 @@ const loadDashboard = async (req, res) => {
         
     } catch (error) {
         console.log(error);
-        return res.status(500).send("Internal Server Error");
+        res.status(500).render('500');
     }
 };
 
@@ -344,7 +347,7 @@ const logout = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
-        res.status(500).send('Internal Server Error');
+        res.status(500).render('500');
     }
 };
 
@@ -356,6 +359,7 @@ const forgetLoad = async(req,res)=>{
         
     } catch (error) {
         console.log(error);
+        res.status(500).render('500');
     }
 }
 
@@ -382,6 +386,7 @@ const forgetverify = async(req,res)=>{
         }
     } catch (error) {
         console.log(error);
+        res.status(500).render('500');
     }
 }
 
@@ -398,6 +403,7 @@ const resetPasswordLoad = async(req,res)=>{
 
     } catch (error) {
         console.log(error);
+        res.status(500).render('500');
     }
 }
 
@@ -414,6 +420,7 @@ const resetPassword = async(req,res)=>{
 
     } catch (error) {
         console.log(error);
+        res.status(500).render('500');
     }
 }
 
@@ -464,7 +471,7 @@ const viewUsers = async(req,res)=>{
         
     } catch (error) {
         console.log(error);
-        res.status(500).send("Internal Server Error");
+        res.status(500).render('500');
     }
 
 };
@@ -489,7 +496,7 @@ const userBlockorActive = async(req,res)=>{
         
     } catch (error) {
         console.log(error);
-        res.status(500).send("Internal Server Error");
+        res.status(500).render('500');
     }
 };
 
@@ -587,7 +594,7 @@ const viewOrderDetails = async(req, res)=>{
         
     } catch (error) {
         console.log(error);
-        res.status(500).send("Internal Server Error");
+        res.status(500).render('500');
     }
 };
 
@@ -625,7 +632,7 @@ const changeOrderStatus = async(req, res)=>{
         
     } catch (error) {
         console.log(error);
-        res.status(500).send("Internal Server Error");
+        res.status(500).render('500');
     }
 };
 
@@ -665,7 +672,7 @@ const adminCancelOrder = async(req, res)=>{
    
     } catch (error) {
         console.log(error);
-        return res.status(500).json({ status: false, message: 'Internal Server Error' });
+        res.status(500).render('500');
     }
 
 };
