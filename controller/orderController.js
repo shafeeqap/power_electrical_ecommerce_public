@@ -556,91 +556,75 @@ const cancelOrder = async(req, res)=>{
 
 
 // ------------------------------------------- User Return Order --------------------------------------------//
-const returnOrder = async(req, res)=>{
+const returnOrder = async (req, res) => {
     try {
-
         const orderId = req.query.orderId;
         const productIdToReturn = req.query.productId;
         const userId = req.session.user_id;
         const returnReson = req.body.reason;
         const returnAmount = req.body.totalPrice;
-        const amount = parseInt(returnAmount);
-        const refundOption = req.body.refundOption;
-        
-        const orderData = await Order.findOne({_id:orderId});
-        
-        const userData = await User.findOne({_id:userId});
-        
 
-        const currentWalletBalance = userData.wallet+amount;
+        const orderData = await Order.findOne({ _id: orderId });
 
+        if (!orderData) {
+            return res.status(404).send('Order not found');
+        }
 
-        if(orderData.paymentMethod==='COD'){
+        const userData = await User.findOne({ _id: userId });
 
-            const productInfo = orderData.products.find((product)=>String(product.productId)===String(productIdToReturn));
+        const currentWalletBalance = userData.wallet + parseInt(returnAmount);
 
-            productInfo.orderStatus = 'Returned';
-            productInfo.paymentStatus = 'Cancelled';
-            productInfo.returnOrderStatus.reason=returnReson;
-            productInfo.updatedAt=Date.now();
+        const productInfo = orderData.products.find((product) => String(product.productId) === String(productIdToReturn));
 
-            await orderData.save();
+        if (!productInfo) {
+            return res.status(404).send('Product not found in the order');
+        }
 
-            const quantity = productInfo.quantity;
-            const productId = productInfo.productId;
+        productInfo.orderStatus = 'Returned';
+        productInfo.returnOrderStatus = {
+            status: 'none',  
+            reason: returnReson
+        };
+        productInfo.updatedAt = Date.now();
+        productInfo.paymentStatus = 'Refund';
 
-            const updatedQuantity = await Product.findOneAndUpdate(
-                {_id:productId},
-                {$inc:{qty:quantity}},
-                {new:true});
+        await orderData.save();
 
-                
-
-                res.redirect('orders');
-
-        }else{
-            if(refundOption){
-                await User.findOneAndUpdate({_id:userId},
-                    {$inc:{wallet:returnAmount},
-                    $push:{walletHistory:{
-                    transactionDate:new Date(),
-                    transactionDetails:'Returned Product Amount Credited',
-                    transactionType:'Credit',
-                    transactionAmount:returnAmount,
-                    currentBalance:currentWalletBalance
+        // Update user's wallet and wallet history
+        await User.updateOne(
+            { _id: userId },
+            {
+                $inc: { wallet: returnAmount },
+                $push: {
+                    walletHistory: {
+                        transactionDate: new Date(),
+                        transactionDetails: 'Returned Product Amount Credited',
+                        transactionType: 'Credit',
+                        transactionAmount: returnAmount,
+                        currentBalance: currentWalletBalance
+                    }
                 }
             }
-        }
-    );
+        );
 
-        
-                const productInfo = orderData.products.find((order)=>String(order.productId)===String(productIdToReturn));
+        // Update product quantity
+        const quantity = productInfo.quantity;
+        const productId = productInfo.productId;
 
-                productInfo.orderStatus='Returned';
-                productInfo.paymentStatus='Refund';
-                productInfo.returnOrderStatus.reason=returnReson;
-                productInfo.updatedAt=Date.now();
+        await Product.updateOne(
+            { _id: productId },
+            { $inc: { qty: quantity } }
+        );
 
-                await orderData.save()
+        return res.redirect('/orders');
 
-                const quantity = productInfo.quantity;
-                const productId = productInfo.productId;
-
-                const updatedQuantity = await Product.findOneAndUpdate(
-                    {_id:productId},
-                    {$inc:{qty:quantity}},
-                    {new:true});
-
-                    res.redirect('/orders');
-            }
-        }
-        
-        
     } catch (error) {
-        console.log(error);
-        res.render('500')
+        console.error(error);
+        res.status(500).render('500');
     }
 };
+
+
 
 
 
