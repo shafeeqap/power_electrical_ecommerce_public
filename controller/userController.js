@@ -25,7 +25,7 @@ var instance = new Razorpay({
 
 
 
-// securePassword (bcrypt)----------------------//
+//----------------------------------------------- securePassword (bcrypt)----------------------//
 const securePassword = async(password)=>{
 
     try {
@@ -177,7 +177,7 @@ const loadRegister= async(req,res)=>{
     }
 }
 
-// user registration-------------//
+//-------------------------------------------------- user registration-----------------------------------//
 const insertUser = async(req,res)=>{
 
     try {
