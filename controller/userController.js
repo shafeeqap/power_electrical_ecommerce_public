@@ -34,6 +34,7 @@ const securePassword = async(password)=>{
         return passwordHash;
     } catch (error) {
         console.log(error);
+        res.status(500).render('500');
     }
 }
 
@@ -84,6 +85,7 @@ const loadOtp = async(req,res)=>{
         
     } catch (error) {
         console.log(error);
+        res.status(500).render('500');
     }
 };
 
@@ -174,6 +176,7 @@ const loadRegister= async(req,res)=>{
         res.render('register',{ emailMessage: '' ,mobileMessage :''});
     } catch (error) {
         console.log(message);
+        res.status(500).render('500');
     }
 }
 
@@ -218,7 +221,7 @@ const insertUser = async(req,res)=>{
         
     } catch (error) {
         console.log(error);
-        res.json({ success: false, message: 'An error occurred while processing your request' });
+        res.status(500).render('500');
     }
 };
 
@@ -267,7 +270,7 @@ const resendOtp = async(req,res)=>{
         
     } catch (error) {
         console.log("Error sending OTP:",error);
-        res.status(500).send("Error sending OTP");
+        res.status(500).render('500');
         
     }
 };
@@ -302,7 +305,8 @@ const sendResetPasswordMail= async(name,email,token)=>{
         })
         
     } catch (error) {
-        console.log(error.message);
+        console.log(error);
+        res.status(500).render('500');
     }
 }
 
@@ -311,7 +315,8 @@ const loginLoad = async(req,res)=>{
     try {
         res.render('login');
     } catch (error) {
-        console.log(error); 
+        console.log(error);
+        res.status(500).render('500'); 
     }
 };
 
@@ -362,8 +367,8 @@ const verifyLogin=async(req, res)=>{
         }
 
     } catch (error) {
-        console.log(error,  { message: 'An error occurred', status: 500 });
-        return res.status(500).json({message:'An error occurred'});
+        console.log(error);
+        res.status(500).render('500');
     }
 }
 
@@ -406,7 +411,7 @@ const loadHome = async(req,res)=>{
 
     } catch (error) {
         console.log(error);
-        res.status(500).send('Internal Server Error');
+        res.status(500).render('500');
     }
 }
 
